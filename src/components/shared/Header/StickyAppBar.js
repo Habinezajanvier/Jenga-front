@@ -193,7 +193,7 @@ const ResponsiveAppBar = ({ styles }) => {
                 sx={{ p: 0 }}
               >
                 <Avatar
-                  alt={`${profile.firstname} ${profile.lastname}`}
+                  alt={profile.firstname}
                   src={profile.profileImage}
                 />
               </IconButton>

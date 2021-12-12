@@ -1,12 +1,19 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import {
   GET_ONE_USER,
   GET_ONE_USER_FAILED,
   GET_SELF_PROFILE,
   GET_USERS,
   GET_USERS_FAILED,
+  HIRE_USER_FAILLURE,
+  HIRE_USER_SUCCESS,
   REQUEST_GET_ONE_USER,
   REQUEST_GET_USERS,
+  REQUEST_HIRE_USER,
+  REQUEST_UPDATE_USER,
+  UPDATE_USER_FAILED,
+  UPDATE_USER_SUCCESS,
 } from '../types';
 
 const { REACT_APP_BACKEND } = process.env;
@@ -63,3 +70,46 @@ export const getOneUser = (id) => (dispatch) => {
       });
     });
 };
+
+export const updateUser = (id, userData) => (dispatch) => {
+  dispatch({ type: REQUEST_UPDATE_USER });
+  axios
+    .put(`${REACT_APP_BACKEND}/api/users/${id}`, userData)
+    .then((res) => {
+      toast.success(res.data.message);
+      dispatch({
+        type: UPDATE_USER_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      toast.error(error.response?.data?.error);
+      dispatch({
+        type: UPDATE_USER_FAILED,
+        payload: error.response?.data?.error,
+      });
+    });
+};
+
+export const requestEmployee =
+  (employeeId) => (dispatch) => {
+    dispatch({ type: REQUEST_HIRE_USER });
+    axios
+      .get(
+        `${REACT_APP_BACKEND}/api/users/request/${employeeId}`
+      )
+      .then((res) => {
+        toast.success(res.data.message);
+        dispatch({
+          type: HIRE_USER_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        toast.error(error.response?.data?.error);
+        dispatch({
+          type: HIRE_USER_FAILLURE,
+          payload: error.response?.data?.error,
+        });
+      });
+  };

@@ -33,11 +33,7 @@ export default function UserCard({
           {user.firstname} {user.lastname}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {/* {user.bios} */}
-          Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit. Quisque finibus felis ac finibus
-          scelerisque. In pellentesque felis non turpis
-          interdum
+          {user.bios}
         </Typography>
       </CardContent>
       <CardActions

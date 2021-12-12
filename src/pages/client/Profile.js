@@ -6,16 +6,41 @@ import ProfileDescription from '../../components/UserProfile/Description';
 import ProfileCard from '../../components/UserProfile/Profile';
 import SKillsCard from '../../components/UserProfile/SkillsCard';
 import { Box } from '@mui/system';
-import { getOneUser } from '../../redux/action';
+import {
+  getOneUser,
+  requestEmployee,
+  updateUser,
+} from '../../redux/action';
+import TransitionsModal from '../../components/shared/Model';
+import UpdateUserProfileForm from '../../components/UserProfile/UpdateProfile';
+import UpdateUserBiosForm from '../../components/UserProfile/UpdateBiosform';
 
 function ProfileContent() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { profile } = useSelector((state) => state.users);
+  const { profile, updateSuccess } = useSelector(
+    (state) => state.users
+  );
+  const [openProfileModel, setOpenProfileModel] =
+    React.useState(false);
+  const [openBiosModal, setOpenBiosModal] =
+    React.useState(false);
 
   React.useEffect(() => {
     dispatch(getOneUser(id));
   }, [dispatch, id]);
+
+  React.useEffect(() => {
+    if (updateSuccess) {
+      setOpenProfileModel(false);
+      setOpenBiosModal(false);
+      dispatch(getOneUser(id));
+    }
+  }, [dispatch, updateSuccess]);
+
+  const requestUser = (userId) => {
+    dispatch(requestEmployee(userId));
+  };
   return (
     <>
       <Typography
@@ -30,7 +55,11 @@ function ProfileContent() {
         <Grid container spacing={2}>
           <Grid item md={4} sm={6} xs={12}>
             {Boolean(profile.id) && (
-              <ProfileCard user={profile} />
+              <ProfileCard
+                openModel={setOpenProfileModel}
+                user={profile}
+                requestUser={requestUser}
+              />
             )}
           </Grid>
           <Grid item md={8} sm={12}>
@@ -38,6 +67,7 @@ function ProfileContent() {
               <ProfileDescription
                 description={profile.bios}
                 userId={profile.id}
+                openModal={setOpenBiosModal}
               />
             )}
           </Grid>
@@ -59,6 +89,27 @@ function ProfileContent() {
           </Grid>
         </Box>
       </Typography>
+      <TransitionsModal
+        open={openProfileModel}
+        setOpen={setOpenProfileModel}
+        top={400}
+      >
+        <UpdateUserProfileForm
+          action={updateUser}
+          profile={profile}
+          setModel={setOpenProfileModel}
+        />
+      </TransitionsModal>
+      <TransitionsModal
+        open={openBiosModal}
+        setOpen={setOpenBiosModal}
+      >
+        <UpdateUserBiosForm
+          action={updateUser}
+          profile={profile}
+          setModel={setOpenBiosModal}
+        />
+      </TransitionsModal>
     </>
   );
 }

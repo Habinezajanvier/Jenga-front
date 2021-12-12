@@ -4,14 +4,19 @@ import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
 import EditIcon from '@mui/icons-material/Edit';
 import jwtDecode from 'jwt-decode';
+import Title from '../shared/Title';
 
-const ProfileDescription = ({ description, userId }) => {
+const ProfileDescription = ({
+  description,
+  userId,
+  openModal,
+}) => {
   const [id, setId] = React.useState('');
   React.useEffect(() => {
     const token = localStorage.IdToken;
     const { id } = jwtDecode(token);
     setId(id);
-  });
+  }, []);
   return (
     <>
       <Paper
@@ -21,15 +26,9 @@ const ProfileDescription = ({ description, userId }) => {
           position: 'relative',
         }}
       >
+        <Title>Bios</Title>
         <Typography component="p" variant="h6">
-          Cras mattis consectetur purus sit amet fermentum.
-          Cras justo odio, dapibus ac facilisis in, egestas
-          eget quam. Morbi leo risus, porta ac consectetur
-          ac, vestibulum at eros. Praesent commodo cursus
-          magna, vel scelerisque nisl consectetur et. Cras
-          mattis consectetur purus sit amet fermentum. Cras
-          justo odio, dapibus ac facilisis in, egestas eget
-          quam
+          {description}
         </Typography>
         {userId === id && (
           <Fab
@@ -40,6 +39,7 @@ const ProfileDescription = ({ description, userId }) => {
             }}
             color="primary"
             aria-label="edit"
+            onClick={() => openModal(true)}
           >
             <EditIcon />
           </Fab>
