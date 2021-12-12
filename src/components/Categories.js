@@ -5,7 +5,7 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '80%',
-    margin: '3.4rem auto',
+    margin: '2.4rem auto',
     marginBottom: '6rem',
   },
   heading: {
@@ -53,30 +53,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CurrentPost = () => {
+const Categories = ({ categories }) => {
   const classes = useStyles();
   return (
     <>
       <div className={classes.root}>
         <div className={classes.heading}>
           <Typography variant="h6" component="h2">
-            Categories work wating for you
+            Skill's categories wating for you
           </Typography>
           <Typography variant="h4" component="h1">
-            Current <span> Job Posts</span>
+            Current <span> Categories</span>
           </Typography>
         </div>
         <div>
           <Grid container spacing={2}>
-            {[...new Array(12)].map((item, i) => (
+            {categories.map((item, i) => (
               <Grid item md={3} sm={6} xs={12} key={i}>
                 <div className={classes.content}>
                   <Typography variant="h6" component="h2">
-                    Web Development
+                    {item.name}
                   </Typography>
-                  <Typography variant="p" component="div">
-                    1000
-                  </Typography>
+                  {item.skills.length !== 0 && (
+                    <Typography variant="p" component="div">
+                      {item.skills.length}
+                    </Typography>
+                  )}
                 </div>
               </Grid>
             ))}
@@ -87,4 +89,4 @@ const CurrentPost = () => {
   );
 };
 
-export default CurrentPost;
+export default Categories;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import UserCard from './UserCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,87 +30,72 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   content: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignContent: 'center',
-    borderRadius: '.4rem',
-    marginLeft: '1.3rem',
-    padding: '1rem .9rem',
-    backgroundColor: '#fff',
-    '&:hover': {
-      cursor: 'pointer',
-    },
-    '& > h2': {
-      fontSize: '.9rem',
-    },
-    '& > div': {
-      backgroundColor: '#E9F8EF',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-around',
-      alignItem: 'center',
-      padding: '.1rem .4rem',
-      borderRadius: '.2rem',
+    marginTop: '1.2rem',
+    marginBottom: '2rem',
+    '& h1': {
+      fontWeight: '500',
+      marginTop: '1.6rem',
+      marginBottom: '3.1rem',
+      '& span': {
+        fontWeight: '700',
+      },
     },
   },
 }));
 
-const RecentPost = () => {
+const RecentPost = ({ categories, openModel }) => {
   const classes = useStyles();
   return (
     <div className={classes.wrapper}>
       <div className={classes.root}>
         <div className={classes.heading}>
           <Typography variant="h6" component="h2">
-            Recently Added Jobs
-          </Typography>
-          <Typography variant="h4" component="h1">
-            Recent <span> Jobs</span>
+            Hire best freelancer
           </Typography>
         </div>
-        <div>
-          <Grid container spacing={2}>
-            {[...new Array(7)].map((item, i) => (
-              <Grid item xs={12} key={i}>
-                <div className={classes.content}>
-                  <div>
-                    <div>
-                      <Typography
-                        variant="h6"
-                        component="h2"
-                      >
-                        Frontend Development
-                      </Typography>
-                      <Typography
-                        variant="p"
-                        component="div"
-                      >
-                        Apply job
-                      </Typography>
-                    </div>
-                    <div>
-                      <Typography
-                        variant="h6"
-                        component="h2"
-                      >
-                        Compamy
-                      </Typography>
-                      <Typography
-                        variant="p"
-                        component="div"
-                      >
-                        Location
-                      </Typography>
-                    </div>
-                  </div>
-                  <Typography variant="p" component="div">
-                    Apply job
-                  </Typography>
-                </div>
+        {categories &&
+          categories.map((category, i) => (
+            <div className={classes.content} key={i}>
+              <Typography variant="h4" component="h1">
+                From <span>{category.name} </span>
+              </Typography>
+              <Grid container spacing={4}>
+                {category?.skills?.map((userSkill, i) =>
+                  userSkill?.skills?.map((skill, i) => (
+                    <Grid
+                      item
+                      xs={12}
+                      md={4}
+                      lg={3}
+                      key={i}
+                    >
+                      <UserCard
+                        user={skill?.user}
+                        hireAction={openModel}
+                      />
+                    </Grid>
+                  ))
+                )}
+
+                {/* {category?.skills?.skills?.user?.map(
+                  (item, i) => (
+                    <Grid
+                      item
+                      xs={12}
+                      md={4}
+                      lg={3}
+                      key={i}
+                    >
+                      <UserCard
+                        user={item}
+                        hireAction={openModel}
+                      />
+                    </Grid>
+                  )
+                )} */}
               </Grid>
-            ))}
-          </Grid>
-        </div>
+            </div>
+          ))}
       </div>
     </div>
   );
