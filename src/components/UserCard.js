@@ -1,0 +1,59 @@
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import portrait from '../assets/images/portrait.png';
+import PrimaryButton from './shared/PrimaryButton';
+
+export default function UserCard({
+  hireAction,
+  moreAction,
+  user,
+}) {
+  return (
+    <Card sx={{ maxWidth: 345 }}>
+      {/* {user.profileImage && ( */}
+      <CardMedia
+        component="img"
+        alt="green iguana"
+        height="180"
+        // image={user.profileImage}
+        image={portrait}
+      />
+      {/* )} */}
+      <CardContent>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+        >
+          {user.firstname} {user.lastname}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {/* {user.bios} */}
+          Lorem ipsum dolor sit amet, consectetur adipiscing
+          elit. Quisque finibus felis ac finibus
+          scelerisque. In pellentesque felis non turpis
+          interdum
+        </Typography>
+      </CardContent>
+      <CardActions
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Button onClick={hireAction} size="small">
+          Hire me
+        </Button>
+        {/* <Button size="small">Learn more</Button> */}
+        <PrimaryButton to={`/user_profile/${user.id}`}>
+          learn more
+        </PrimaryButton>
+      </CardActions>
+    </Card>
+  );
+}
