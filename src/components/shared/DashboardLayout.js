@@ -7,7 +7,6 @@ import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -94,8 +93,8 @@ function DashboardLayout({ name, children }) {
   );
   const { profile } = useSelector((state) => state.users);
 
-  const [anchorElNav, setAnchorElNav] =
-    React.useState(null);
+  // const [anchorElNav, setAnchorElNav] =
+  //   React.useState(null);
 
   const [anchorElUser, setAnchorElUser] =
     React.useState(null);
@@ -108,9 +107,9 @@ function DashboardLayout({ name, children }) {
     setAnchorElUser(null);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  // const handleCloseNavMenu = () => {
+  //   setAnchorElNav(null);
+  // };
 
   const handleDirects = (nav) => {
     const link = nav.toLowerCase();

@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { Link } from 'react-router-dom';
-import Grid from '@mui/material/Grid';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
+// import { Link } from 'react-router-dom';
+// import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 const AddCateogyForm = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [category, setCatgory] = React.useState({
     name: '',
     description: '',

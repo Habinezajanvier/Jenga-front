@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import jwtDecode from 'jwt-decode';
 import { isEmpty } from 'lodash';
 import { getSelfProfile, logoutUser } from './redux/action';
-import { AUTH_SUCCESS, AUTH_FAILIED } from './redux/types';
+import { AUTH_SUCCESS } from './redux/types';
 import axios from 'axios';
 
 toast.configure({

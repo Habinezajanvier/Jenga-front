@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -17,36 +16,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import Tooltip from '@mui/material/Tooltip';
 import moment from 'moment';
-
-function createData(
-  name,
-  calories,
-  fat,
-  carbs,
-  protein,
-  price
-) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: '2020-01-05',
-        customerId: '11091700',
-        amount: 3,
-      },
-      {
-        date: '2020-01-02',
-        customerId: 'Anonymous',
-        amount: 1,
-      },
-    ],
-  };
-}
 
 function Row(props) {
   const { category, index } = props;

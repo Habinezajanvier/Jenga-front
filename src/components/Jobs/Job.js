@@ -101,10 +101,6 @@ const rows = [
   ),
 ];
 
-function preventDefault(event) {
-  event.preventDefault();
-}
-
 export default function Jobs() {
   return (
     <>

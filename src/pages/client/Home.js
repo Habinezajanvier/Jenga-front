@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import Carousel, {
-  slidesToShowPlugin,
+  // slidesToShowPlugin,
   autoplayPlugin,
   Dots,
 } from '@brainhubeu/react-carousel';
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 
 const HeroSlider = ({ classes }) => {
   const [value, setValue] = React.useState(0);
-  const [slides, setSlides] = React.useState();
+  // const [slides, setSlides] = React.useState();
 
   return (
     <>
@@ -126,19 +126,19 @@ export default () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [openMore, setOpenMore] = React.useState(false);
-  const [homeUsers, setHomeUsers] = React.useState([]);
+  // const [homeUsers, setHomeUsers] = React.useState([]);
   const [user, setUser] = React.useState({});
   const { categories } = useSelector(
     (state) => state.categories
   );
-  const { users } = useSelector((state) => state.users);
+  // const { users } = useSelector((state) => state.users);
 
-  React.useEffect(() => {
-    const filterUsers = users.filter(
-      (user) => user.skills?.length !== 0
-    );
-    setHomeUsers(filterUsers);
-  }, [users]);
+  // React.useEffect(() => {
+  //   const filterUsers = users.filter(
+  //     (user) => user.skills?.length !== 0
+  //   );
+  //   setHomeUsers(filterUsers);
+  // }, [users]);
 
   React.useEffect(() => {
     dispatch(getCategories());

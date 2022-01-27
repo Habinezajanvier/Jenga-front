@@ -1,7 +1,7 @@
 import * as React from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from '@mui/material/';
-import { styled, alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 const StyledButton = styled(MenuItem)((theme) => ({
   fontSize: 18,
