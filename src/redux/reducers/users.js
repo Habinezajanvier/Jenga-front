@@ -5,8 +5,14 @@ import {
   GET_SELF_PROFILE,
   GET_USERS,
   GET_USERS_FAILED,
+  HIRE_USER_FAILLURE,
+  HIRE_USER_SUCCESS,
   REQUEST_GET_ONE_USER,
   REQUEST_GET_USERS,
+  REQUEST_HIRE_USER,
+  REQUEST_UPDATE_USER,
+  UPDATE_USER_FAILED,
+  UPDATE_USER_SUCCESS,
 } from '../types';
 
 const initialState = {
@@ -15,6 +21,10 @@ const initialState = {
   error: null,
   response: null,
   getUsersLoading: false,
+  updateLoading: null,
+  updateSuccess: false,
+  employeeLoading: false,
+  employee: {},
 };
 
 export default (state = initialState, action) => {
@@ -70,6 +80,45 @@ export default (state = initialState, action) => {
       return {
         ...state,
         getUsersLoading: false,
+        error: action.payload.error,
+      };
+
+    case REQUEST_UPDATE_USER:
+      return {
+        ...state,
+        updateLoading: true,
+        updateSuccess: false,
+      };
+    case UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        updateLoading: null,
+        response: action.payload.message,
+        updateSuccess: true,
+      };
+    case UPDATE_USER_FAILED:
+      return {
+        ...state,
+        updateLoading: null,
+        error: action.payload.error,
+        updateSuccess: false,
+      };
+    case REQUEST_HIRE_USER:
+      return {
+        ...state,
+        employee: {},
+        employeeLoading: true,
+      };
+    case HIRE_USER_SUCCESS:
+      return {
+        ...state,
+        employeeLoading: false,
+        employee: action.payload.data,
+      };
+    case HIRE_USER_FAILLURE:
+      return {
+        ...state,
+        employeeLoading: false,
         error: action.payload.error,
       };
     default:

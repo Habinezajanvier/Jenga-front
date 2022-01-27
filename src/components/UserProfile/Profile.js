@@ -13,14 +13,23 @@ import EditIcon from '@mui/icons-material/Edit';
 import portrait from '../../assets/images/portrait.png';
 import moment from 'moment';
 import jwtDecode from 'jwt-decode';
+import { useSelector } from 'react-redux';
+import Loader from 'react-spinners/BeatLoader';
 
-export default function ProfileCard({ user }) {
+export default function ProfileCard({
+  user,
+  openModel,
+  requestUser,
+}) {
   const [id, setId] = React.useState('');
   React.useEffect(() => {
     const token = localStorage.IdToken;
     const { id } = jwtDecode(token);
     setId(id);
   });
+  const { employeeLoading } = useSelector(
+    (state) => state.users
+  );
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -39,6 +48,14 @@ export default function ProfileCard({ user }) {
             align="center"
           >
             {user.firstname} {user.lastname}
+          </Typography>
+          <Typography
+            gutterBottom
+            variant="h6"
+            component="div"
+            align="center"
+          >
+            {user.profileTitle}
           </Typography>
           <Typography
             variant="body2"
@@ -90,6 +107,29 @@ export default function ProfileCard({ user }) {
               variant="body2"
               color="text.secondary"
             >
+              Location
+            </Typography>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              fontWeight={900}
+            >
+              {user.location}
+            </Typography>
+          </Typography>
+          <Typography
+            component="div"
+            gutterBottom
+            sx={{
+              marginTop: 2,
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Typography
+              variant="body2"
+              color="text.secondary"
+            >
               Member since
             </Typography>
             <Typography
@@ -104,12 +144,21 @@ export default function ProfileCard({ user }) {
       </CardActionArea>
       <CardActions>
         {user.id === id && (
-          <IconButton>
+          <IconButton onClick={() => openModel(true)}>
             <EditIcon color="primary" />
           </IconButton>
         )}
         {user.id !== id && (
-          <Button variant="text">Hire me</Button>
+          <Button
+            onClick={() => requestUser(user.id)}
+            variant="text"
+          >
+            {employeeLoading ? (
+              <Loader color="#3E8E7E" />
+            ) : (
+              'Hire me'
+            )}
+          </Button>
         )}
       </CardActions>
     </Card>

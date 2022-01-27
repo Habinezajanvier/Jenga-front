@@ -12,6 +12,7 @@ export default function UserCard({
   hireAction,
   moreAction,
   user,
+  setUser,
 }) {
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -33,11 +34,7 @@ export default function UserCard({
           {user.firstname} {user.lastname}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {/* {user.bios} */}
-          Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit. Quisque finibus felis ac finibus
-          scelerisque. In pellentesque felis non turpis
-          interdum
+          {user.bios}
         </Typography>
       </CardContent>
       <CardActions
@@ -46,7 +43,13 @@ export default function UserCard({
           justifyContent: 'space-between',
         }}
       >
-        <Button onClick={hireAction} size="small">
+        <Button
+          onClick={() => {
+            setUser(user);
+            hireAction(true);
+          }}
+          size="small"
+        >
           Hire me
         </Button>
         {/* <Button size="small">Learn more</Button> */}

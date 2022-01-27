@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RecentPost = ({ categories, openModel }) => {
+const RecentPost = ({ categories, openModel, setUser }) => {
   const classes = useStyles();
   return (
     <div className={classes.wrapper}>
@@ -72,6 +72,7 @@ const RecentPost = ({ categories, openModel }) => {
                       <UserCard
                         user={skill?.user}
                         hireAction={openModel}
+                        setUser={setUser}
                       />
                     </Grid>
                   ))

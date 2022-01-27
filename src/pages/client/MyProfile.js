@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { Grid, Typography } from '@mui/material';
 import ProfileDescription from '../../components/UserProfile/Description';
 import ProfileCard from '../../components/UserProfile/Profile';
@@ -14,9 +13,10 @@ import {
 import TransitionsModal from '../../components/shared/Model';
 import UpdateUserProfileForm from '../../components/UserProfile/UpdateProfile';
 import UpdateUserBiosForm from '../../components/UserProfile/UpdateBiosform';
+import jwtDecode from 'jwt-decode';
 
-function ProfileContent() {
-  const { id } = useParams();
+function MyProfileContent() {
+  const [id, setId] = React.useState('');
   const dispatch = useDispatch();
   const { profile, updateSuccess } = useSelector(
     (state) => state.users
@@ -25,6 +25,12 @@ function ProfileContent() {
     React.useState(false);
   const [openBiosModal, setOpenBiosModal] =
     React.useState(false);
+
+  React.useEffect(() => {
+    const token = localStorage.IdToken;
+    const { id } = jwtDecode(token);
+    setId(id);
+  }, []);
 
   React.useEffect(() => {
     dispatch(getOneUser(id));
@@ -114,4 +120,4 @@ function ProfileContent() {
   );
 }
 
-export default ProfileContent;
+export default MyProfileContent;

@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 
 const style = {
   position: 'absolute',
-  top: 200,
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 600,
@@ -22,6 +21,7 @@ export default function TransitionsModal({
   open,
   setOpen,
   children,
+  top = 200,
 }) {
   const handleClose = () => setOpen(false);
 
@@ -39,7 +39,7 @@ export default function TransitionsModal({
         }}
       >
         <Fade in={open}>
-          <Box sx={style}>{children}</Box>
+          <Box sx={{ ...style, top }}>{children}</Box>
         </Fade>
       </Modal>
     </div>

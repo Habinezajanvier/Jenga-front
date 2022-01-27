@@ -13,6 +13,7 @@ import Categories from './pages/admin/Categories';
 import UserProfile from './pages/admin/UserProfile';
 import Blog from './pages/client/Blog';
 import ProfileContent from './pages/client/Profile';
+import MyProfileContent from './pages/client/MyProfile';
 import PrivateRoute from './components/hoc/PrivateRoute';
 import CustomRoute from './components/hoc/CustomRoute';
 
@@ -27,6 +28,11 @@ function ClientRoutes() {
         exact
         path="/user_profile/:id"
         component={ProfileContent}
+      />
+      <CustomRoute
+        exact
+        path="/profile"
+        component={MyProfileContent}
       />
       <Route exact path="/" component={Home} />
     </>
