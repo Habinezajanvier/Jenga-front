@@ -12,6 +12,7 @@ export default function UserCard({
   hireAction,
   moreAction,
   user,
+  setUser,
 }) {
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -42,7 +43,13 @@ export default function UserCard({
           justifyContent: 'space-between',
         }}
       >
-        <Button onClick={hireAction} size="small">
+        <Button
+          onClick={() => {
+            setUser(user);
+            hireAction(true);
+          }}
+          size="small"
+        >
           Hire me
         </Button>
         {/* <Button size="small">Learn more</Button> */}

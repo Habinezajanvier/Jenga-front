@@ -127,6 +127,7 @@ export default () => {
   const dispatch = useDispatch();
   const [openMore, setOpenMore] = React.useState(false);
   const [homeUsers, setHomeUsers] = React.useState([]);
+  const [user, setUser] = React.useState({});
   const { categories } = useSelector(
     (state) => state.categories
   );
@@ -189,13 +190,14 @@ export default () => {
         <RecentPost
           categories={categories}
           openModel={setOpenMore}
+          setUser={setUser}
         />
       </>
       <TransitionsModal
         open={openMore}
         setOpen={setOpenMore}
       >
-        <HireCard />
+        <HireCard user={user} />
       </TransitionsModal>
     </Box>
   );

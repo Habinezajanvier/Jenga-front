@@ -87,6 +87,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         updateLoading: true,
+        updateSuccess: false,
       };
     case UPDATE_USER_SUCCESS:
       return {
