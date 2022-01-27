@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
@@ -48,8 +49,6 @@ export default function Blog() {
         })
     );
   }, []);
-
-  console.log(posts);
 
   return (
     <Container maxWidth="lg">

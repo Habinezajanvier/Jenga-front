@@ -28,15 +28,11 @@ function ProfileContent() {
 
   React.useEffect(() => {
     dispatch(getOneUser(id));
-  }, [dispatch, id]);
-
-  React.useEffect(() => {
     if (updateSuccess) {
       setOpenProfileModel(false);
       setOpenBiosModal(false);
-      dispatch(getOneUser(id));
     }
-  }, [dispatch, updateSuccess]);
+  }, [dispatch, id, updateSuccess]);
 
   const requestUser = (userId) => {
     dispatch(requestEmployee(userId));
