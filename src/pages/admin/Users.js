@@ -58,7 +58,7 @@ function JobContent() {
 
   React.useEffect(() => {
     dispatch(getUsers());
-  }, []);
+  }, [dispatch]);
   return (
     <Grid container spacing={3}>
       <Grid md={6} sm={12}>
