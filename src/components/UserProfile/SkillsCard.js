@@ -13,7 +13,7 @@ export default function SKillsCard({ skills, userId }) {
     const token = localStorage.IdToken;
     const { id } = jwtDecode(token);
     setId(id);
-  });
+  }, []);
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardContent>

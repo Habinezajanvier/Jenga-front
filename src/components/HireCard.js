@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { Paper } from '@mui/material';
@@ -23,7 +21,7 @@ function HireCard({ user }) {
   );
   React.useEffect(() => {
     dispatch(getOneUser(user.id));
-  }, []);
+  }, [dispatch]);
   return (
     <Grid item xs={12} md={12}>
       <Card sx={{ display: 'flex' }}>

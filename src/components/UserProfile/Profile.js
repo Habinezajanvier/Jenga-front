@@ -26,7 +26,7 @@ export default function ProfileCard({
     const token = localStorage.IdToken;
     const { id } = jwtDecode(token);
     setId(id);
-  });
+  }, []);
   const { employeeLoading } = useSelector(
     (state) => state.users
   );
