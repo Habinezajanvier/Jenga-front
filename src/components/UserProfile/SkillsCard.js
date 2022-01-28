@@ -1,19 +1,62 @@
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Grid, Paper } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import Popover from '@mui/material/Popover';
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
 import jwtDecode from 'jwt-decode';
+import {
+  getSkills,
+  assignUserSkill,
+} from '../../redux/action';
 
 export default function SKillsCard({ skills, userId }) {
+  const dispatch = useDispatch();
   const [id, setId] = React.useState('');
+  const [sortedSkills, setSortedSkills] = React.useState(
+    []
+  );
+  const { skills: allSkills, assignSuccess } = useSelector(
+    (state) => state.skills
+  );
   React.useEffect(() => {
     const token = localStorage.IdToken;
     const { id } = jwtDecode(token);
+    dispatch(getSkills());
     setId(id);
-  }, []);
+  }, [dispatch]);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const popoverId = open ? 'simple-popover' : undefined;
+
+  React.useEffect(() => {
+    let mySkills = [];
+    skills.forEach((skill) => {
+      mySkills = allSkills.filter(
+        (item) => item.id !== skill.id
+      );
+    });
+    setSortedSkills(mySkills);
+  }, [allSkills, skills, assignSuccess]);
+
+  const assignSkill = (skillId) => {
+    dispatch(assignUserSkill(skillId, id));
+  };
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardContent>
@@ -36,9 +79,36 @@ export default function SKillsCard({ skills, userId }) {
           </Typography>
           {userId === id && (
             <Typography component="div">
-              <IconButton>
+              <IconButton onClick={handleClick}>
                 <AddIcon color="primary" />
               </IconButton>
+              {sortedSkills.length !== 0 && (
+                <Popover
+                  id={popoverId}
+                  open={open}
+                  anchorEl={anchorEl}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                >
+                  <MenuList>
+                    {sortedSkills.map((item) => (
+                      <MenuItem
+                        onClick={() => assignSkill(item.id)}
+                      >
+                        <Typography
+                          key={item.id}
+                          sx={{ p: 1 }}
+                        >
+                          {item.name}
+                        </Typography>
+                      </MenuItem>
+                    ))}
+                  </MenuList>
+                </Popover>
+              )}
             </Typography>
           )}
         </Typography>
