@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -16,10 +18,58 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import Tooltip from '@mui/material/Tooltip';
 import moment from 'moment';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Popover from '@mui/material/Popover';
+import {
+  MenuItem,
+  MenuList,
+  Checkbox,
+} from '@mui/material';
+import {
+  getSkills,
+  assignCategorySkill,
+} from '../../redux/action';
 
 function Row(props) {
   const { category, index } = props;
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
+  const [selected, setSelected] = React.useState([]);
+  const [disabled, setDisabled] = React.useState([]);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleSelection = (id) => {
+    !selected.includes(id)
+      ? setSelected([...selected, id])
+      : setSelected([
+          ...selected.filter((item) => item !== id),
+        ]);
+  };
+
+  const { skills: allSkills } = useSelector(
+    (state) => state.skills
+  );
+  React.useEffect(() => {
+    dispatch(getSkills());
+    setDisabled([
+      ...category.skills.map((skill) => skill.id),
+    ]);
+  }, [dispatch]);
+
+  const handleSubmit = () =>
+    dispatch(assignCategorySkill(selected, category.id));
+
+  const openPopover = Boolean(anchorEl);
+  const id = openPopover ? 'simple-popover' : undefined;
 
   return (
     <React.Fragment>
@@ -71,11 +121,81 @@ function Row(props) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography
-                variant="h6"
-                gutterBottom
                 component="div"
+                sx={{
+                  display: {
+                    md: 'flex',
+                    sm: 'inline',
+                  },
+                  justifyContent: 'space-between',
+                }}
               >
-                Skills
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  component="div"
+                >
+                  Skills
+                </Typography>
+
+                <IconButton
+                  aria-label="fingerprint"
+                  color="primary"
+                  onClick={handleClick}
+                >
+                  <AddCircleIcon sx={{ fontSize: 40 }} />
+                </IconButton>
+                {allSkills.length !== 0 && (
+                  <Popover
+                    id={id}
+                    open={openPopover}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'right',
+                    }}
+                  >
+                    <MenuList>
+                      <MenuItem
+                        disabled={selected.length === 0}
+                      >
+                        <IconButton
+                          aria-label="fingerprint"
+                          color="primary"
+                          onClick={handleSubmit}
+                        >
+                          <AddCircleIcon
+                            sx={{ fontSize: 30 }}
+                          />
+                        </IconButton>
+                      </MenuItem>
+                      {allSkills.map((item) => (
+                        <MenuItem
+                          disabled={disabled.includes(
+                            item.id
+                          )}
+                          onClick={() =>
+                            handleSelection(item.id)
+                          }
+                        >
+                          <Checkbox
+                            checked={
+                              selected.includes(item.id) ||
+                              disabled.includes(item.id)
+                            }
+                          />
+                          <Typography
+                            key={item.id}
+                            sx={{ p: 1 }}
+                          >
+                            {item.name}
+                          </Typography>
+                        </MenuItem>
+                      ))}
+                    </MenuList>
+                  </Popover>
+                )}
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>

@@ -168,7 +168,7 @@ export default () => {
                   color="primary"
                   sx={{
                     mt: 2,
-                    mb: 1.5,
+                    mb: 1,
                   }}
                 >
                   {item.title}
