@@ -16,7 +16,7 @@ import { getCategories } from '../../redux/action';
 function CategoryContent() {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
-  const { categories } = useSelector(
+  const { categories, assignSuccess } = useSelector(
     (state) => state.categories
   );
   const dataEmployers = {
@@ -39,7 +39,7 @@ function CategoryContent() {
 
   React.useEffect(() => {
     dispatch(getCategories());
-  }, [dispatch]);
+  }, [dispatch, assignSuccess]);
 
   const handleOpenAddCategoryModel = () => setOpen(true);
   return (

@@ -1,18 +1,24 @@
 import React from 'react';
-import { Grid, Typography } from '@mui/material';
+import {
+  Grid,
+  Typography,
+  Popover,
+  MenuList,
+  MenuItem,
+} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '80%',
-    margin: '2.4rem auto',
+    margin: '1rem auto',
     marginBottom: '6rem',
   },
   heading: {
     '& h2': {
       textAlign: 'center',
       color: '#999',
-      marginTop: '2.1rem',
+      marginTop: '1.4rem',
       fontSize: '1.2rem',
     },
     '& h1': {
@@ -55,12 +61,23 @@ const useStyles = makeStyles((theme) => ({
 
 const Categories = ({ categories }) => {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
   return (
     <>
       <div className={classes.root}>
         <div className={classes.heading}>
           <Typography variant="h6" component="h2">
-            Skill's categories wating for you
+            Skill's categories waiting for you
           </Typography>
           <Typography variant="h4" component="h1">
             Current <span> Categories</span>
@@ -70,7 +87,21 @@ const Categories = ({ categories }) => {
           <Grid container spacing={2}>
             {categories.map((item, i) => (
               <Grid item md={3} sm={6} xs={12} key={i}>
-                <div className={classes.content}>
+                <Typography
+                  component="div"
+                  aria-haspopup="true"
+                  aria-owns={
+                    open
+                      ? `mouse-over-popover-${item.id}`
+                      : undefined
+                  }
+                  className={classes.content}
+                  onMouseEnter={
+                    item.skills.length !== 0 &&
+                    handlePopoverOpen
+                  }
+                  onMouseLeave={handlePopoverClose}
+                >
                   <Typography variant="h6" component="h2">
                     {item.name}
                   </Typography>
@@ -79,7 +110,42 @@ const Categories = ({ categories }) => {
                       {item.skills.length}
                     </Typography>
                   )}
-                </div>
+                  {item.skills.length !== 0 && (
+                    <Popover
+                      id={`mouse-over-popover-${item.id}`}
+                      // sx={{
+                      //   pointerEvents: 'none',
+                      // }}
+                      open={
+                        item.skills.length !== 0 && open
+                      }
+                      anchorEl={anchorEl}
+                      anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                      }}
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                      }}
+                      onClose={handlePopoverClose}
+                      disableRestoreFocus
+                    >
+                      <MenuList>
+                        {item.skills.map((item) => (
+                          <MenuItem>
+                            <Typography
+                              key={item.id}
+                              sx={{ p: 1 }}
+                            >
+                              {item.name}
+                            </Typography>
+                          </MenuItem>
+                        ))}
+                      </MenuList>
+                    </Popover>
+                  )}
+                </Typography>
               </Grid>
             ))}
           </Grid>
