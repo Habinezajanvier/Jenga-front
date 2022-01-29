@@ -8,7 +8,7 @@ const style = {
   position: 'absolute',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 600,
+  // width: 600,
   bgcolor: 'background.paper',
   border: '2px solid #3E8E7E',
   boxShadow: 24,
@@ -23,6 +23,11 @@ export default function TransitionsModal({
   top = 200,
 }) {
   const handleClose = () => setOpen(false);
+  const [width, setWidth] = React.useState('');
+
+  React.useEffect(() => {
+    setWidth(window.screen.width);
+  }, []);
 
   return (
     <div>
@@ -38,7 +43,15 @@ export default function TransitionsModal({
         }}
       >
         <Fade in={open}>
-          <Box sx={{ ...style, top }}>{children}</Box>
+          <Box
+            sx={{
+              ...style,
+              top,
+              width: { md: 600, sm: `${width}px` },
+            }}
+          >
+            {children}
+          </Box>
         </Fade>
       </Modal>
     </div>

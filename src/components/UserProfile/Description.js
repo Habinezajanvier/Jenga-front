@@ -34,8 +34,9 @@ const ProfileDescription = ({
           <Fab
             sx={{
               position: 'absolute',
-              bottom: 16,
-              right: 16,
+              bottom: 6,
+              right: 6,
+              opacity: '0.7',
             }}
             color="primary"
             aria-label="edit"

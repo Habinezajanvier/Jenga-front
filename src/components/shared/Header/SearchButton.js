@@ -19,6 +19,10 @@ export const Search = styled('div')(({ theme }) => ({
     marginLeft: theme.spacing(3),
     width: 'auto',
   },
+  [theme.breakpoints.down('sm')]: {
+    display: 'block',
+    margin: theme.spacing(0.5, 0, 0.5, 0),
+  },
 }));
 
 export const SearchIconWrapper = styled('div')(
@@ -30,6 +34,9 @@ export const SearchIconWrapper = styled('div')(
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   })
 );
 
@@ -44,6 +51,10 @@ export const StyledInputBase = styled(InputBase)(
       width: '100%',
       [theme.breakpoints.up('md')]: {
         width: '60ch',
+      },
+      [theme.breakpoints.down('sm')]: {
+        padding: theme.spacing(0.3, 0.2, 0.3, 0.4),
+        margin: theme.spacing(0.3, 0, 0.3, 0),
       },
     },
   })
@@ -60,6 +71,10 @@ export const LocationSearch = styled(InputBase)(
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create('width'),
       width: '100%',
+      [theme.breakpoints.down('sm')]: {
+        padding: theme.spacing(0.3, 0.2, 0.3, 0.4),
+        margin: theme.spacing(0.3, 0, 0.3, 0),
+      },
     },
   })
 );

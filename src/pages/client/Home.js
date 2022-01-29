@@ -30,12 +30,14 @@ const useStyles = makeStyles((theme) => ({
   },
   hero: {
     position: 'relative',
-    // background: `url(${backgroundImage})`,
     width: '60vw',
     // minHeight: 'calc(100vh - 80px)',
     height: '50vh',
     marginTop: '100px',
     backgroundSize: 'cover',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
   },
   heroContent: {
     position: 'absolute',
