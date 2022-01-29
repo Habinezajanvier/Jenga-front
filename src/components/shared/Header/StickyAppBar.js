@@ -11,6 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
+import { Link } from '@mui/material/';
 import {
   getSelfProfile,
   logoutUser,
@@ -100,7 +101,8 @@ const ResponsiveAppBar = ({ styles }) => {
       <Typography
         component="div"
         sx={{
-          display: { md: 'flex' },
+          // display: { md: 'flex' },
+          display: 'flex',
           justifyContent: 'space-between',
           width: '100%',
           alignItems: 'center',
@@ -146,7 +148,9 @@ const ResponsiveAppBar = ({ styles }) => {
                 onClick={handleCloseNavMenu}
               >
                 <Typography textAlign="center">
-                  {page.name}
+                  <Link color="inherit" href={page.link}>
+                    {page.name}
+                  </Link>
                 </Typography>
               </MenuItem>
             ))}
@@ -183,7 +187,7 @@ const ResponsiveAppBar = ({ styles }) => {
           />
         </Search>
 
-        <Box sx={{ flexGrow: 0, mr: 8 }}>
+        <Box sx={{ flexGrow: 0, mr: { md: 8, sm: 3 } }}>
           {authenticated && profile && (
             <Tooltip
               title={`${profile.firstname} ${profile.lastname}`}

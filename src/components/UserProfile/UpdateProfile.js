@@ -71,7 +71,6 @@ export default function UpdateUserProfileForm({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('==userData==>', userData);
     dispatch(action(profile.id, userData));
   };
 
@@ -80,7 +79,10 @@ export default function UpdateUserProfileForm({
       <Box
         component="form"
         sx={{
-          '& .MuiTextField-root': { m: 1, width: '25ch' },
+          '& .MuiTextField-root': {
+            m: { md: 1, sm: 0.3 },
+            width: { md: '25ch', sm: 'auto' },
+          },
         }}
         noValidate
         autoComplete="off"
@@ -88,11 +90,8 @@ export default function UpdateUserProfileForm({
         <Typography
           component="div"
           sx={{
-            display: {
-              sm: 'flex',
-              xs: 'inline',
-            },
-            m: 2,
+            display: 'flex',
+            m: { md: 2, sm: 0.2 },
             mb: 4,
             '& .MuiAvatar-root': {
               mr: 3,
@@ -103,7 +102,28 @@ export default function UpdateUserProfileForm({
             src={profile.profileImage}
             alt="John Doe"
           />
-          <Title>Update your Profile</Title>
+          <Avatar
+            sx={{
+              bgcolor: '#9C433D',
+              display: { md: 'none', sm: 'inline' },
+            }}
+            alt="Remy Sharp"
+            src="/broken-image.jpg"
+            onClick={() => setModel(false)}
+          >
+            X
+          </Avatar>
+          <Typography
+            component="div"
+            sx={{
+              display: {
+                sm: 'none',
+                xs: 'none',
+              },
+            }}
+          >
+            <Title>Update your Profile</Title>
+          </Typography>
         </Typography>
         <Grid container spacing={2}>
           {fields.map((field) => (
@@ -123,7 +143,11 @@ export default function UpdateUserProfileForm({
             <FormControl
               size="small"
               fullWidth
-              sx={{ mt: 1, width: '25ch', ml: 1 }}
+              sx={{
+                mt: 1,
+                width: { md: '25ch', sm: 'auto' },
+                ml: { md: 1, sm: 0.2 },
+              }}
             >
               <InputLabel id="demo-simple-select-label">
                 Gender
@@ -160,6 +184,13 @@ export default function UpdateUserProfileForm({
               startIcon={<CancelIcon />}
               color="danger"
               onClick={() => setModel(false)}
+              sx={{
+                display: {
+                  md: 'inline',
+                  sm: 'none',
+                  xs: 'none',
+                },
+              }}
             >
               Cancel
             </Button>
