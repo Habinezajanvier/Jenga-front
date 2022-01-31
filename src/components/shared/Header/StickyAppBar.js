@@ -24,25 +24,17 @@ import {
   StyledInputBase,
   LocationSearch,
 } from './SearchButton';
+import logo from '../../../assets/images/logo.png';
 
 const pages = [
-  // 'Home',
-  // 'About',
-  // 'Contact',
-  // 'Want a Job',
-  // 'Post a Job',
   {
-    name: 'Jenga',
-    link: '/',
+    name: 'Login',
+    link: '/login',
   },
   {
-    name: 'Blog',
-    link: '/blog',
+    name: 'Join Us',
+    link: '/signup',
   },
-  // {
-  //   name: 'About Us',
-  //   link: '/about',
-  // },
   // {
   //   name: 'Find Freelancers',
   //   link: '/freelancers',
@@ -163,11 +155,24 @@ const ResponsiveAppBar = ({ styles }) => {
             ml: { md: 4, sm: 2 },
           }}
         >
-          {pages.map((page) => (
+          <Typography
+            sx={{
+              width: { md: 150, xs: '100%' },
+            }}
+          >
+            <a href="/">
+              <img
+                style={{ width: '100%' }}
+                src={logo}
+                alt="_jenga_logo_"
+              />
+            </a>
+          </Typography>
+          {/* {pages.map((page) => (
             <NavButton to={page.link}>
               {page.name}
             </NavButton>
-          ))}
+          ))} */}
         </Box>
 
         <Search>
@@ -204,15 +209,16 @@ const ResponsiveAppBar = ({ styles }) => {
             </Tooltip>
           )}
           {!authenticated && (
-            <div
-              style={{
-                display: 'flex',
+            <Typography
+              component="div"
+              sx={{
+                display: { xs: 'none', md: 'flex' },
                 marginRight: '4.6rem',
               }}
             >
               <NavButton to="/login">Login</NavButton>
               <NavButton to="/signup">join</NavButton>
-            </div>
+            </Typography>
           )}
           <Menu
             sx={{ mt: '45px' }}

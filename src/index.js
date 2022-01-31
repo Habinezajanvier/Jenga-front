@@ -11,18 +11,18 @@ import '@brainhubeu/react-carousel/lib/style.css';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#3E8E7E',
+      main: '#135029',
     },
     secondary: {
-      main: '#A6469E',
+      main: '#359C5B',
     },
     danger: {
-      main: '#9C433D',
+      main: '#4F1613',
     },
     background: {
       default: '#fff',
     },
-    grey: { 200: '#78A299' },
+    grey: { 200: '#38694A' },
   },
 });
 
