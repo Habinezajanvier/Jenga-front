@@ -6,7 +6,7 @@ import WorkIcon from '@mui/icons-material/Work';
 
 const styles = {
   fontSize: '3.2rem',
-  color: '#3E8E7E',
+  color: '#135029',
 };
 
 export default [

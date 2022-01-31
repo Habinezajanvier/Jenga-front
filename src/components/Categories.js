@@ -62,13 +62,17 @@ const useStyles = makeStyles((theme) => ({
 const Categories = ({ categories }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [openedPopoverId, setOponedPopoverId] =
+    React.useState(null);
 
-  const handlePopoverOpen = (event) => {
+  const handlePopoverOpen = (event, id) => {
     setAnchorEl(event.currentTarget);
+    setOponedPopoverId(id);
   };
 
   const handlePopoverClose = () => {
     setAnchorEl(null);
+    setOponedPopoverId(null);
   };
 
   const open = Boolean(anchorEl);
@@ -90,15 +94,15 @@ const Categories = ({ categories }) => {
                 <Typography
                   component="div"
                   aria-haspopup="true"
+                  aria-describedby={`mouse-over-popover-${item.id}`}
                   aria-owns={
                     open
                       ? `mouse-over-popover-${item.id}`
                       : undefined
                   }
                   className={classes.content}
-                  onMouseEnter={
-                    item.skills.length !== 0 &&
-                    handlePopoverOpen
+                  onMouseEnter={(e) =>
+                    handlePopoverOpen(e, item.id)
                   }
                   onMouseLeave={handlePopoverClose}
                 >
@@ -116,9 +120,7 @@ const Categories = ({ categories }) => {
                       // sx={{
                       //   pointerEvents: 'none',
                       // }}
-                      open={
-                        item.skills.length !== 0 && open
-                      }
+                      open={openedPopoverId === item.id}
                       anchorEl={anchorEl}
                       anchorOrigin={{
                         vertical: 'bottom',
