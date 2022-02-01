@@ -62,13 +62,13 @@ export const StyledInputBase = styled(InputBase)(
 
 export const LocationSearch = styled(InputBase)(
   ({ theme }) => ({
-    marginLeft: 1,
+    marginLeft: 0,
     flex: 1,
     color: 'inherit',
     '& .MuiInputBase-input': {
       padding: theme.spacing(1, 1, 1, 0),
       // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      paddingLeft: `calc(1em + ${theme.spacing(0.1)})`,
       transition: theme.transitions.create('width'),
       width: '100%',
       [theme.breakpoints.down('sm')]: {

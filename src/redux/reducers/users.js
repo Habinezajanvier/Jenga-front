@@ -13,6 +13,9 @@ import {
   REQUEST_UPDATE_USER,
   UPDATE_USER_FAILED,
   UPDATE_USER_SUCCESS,
+  SEARCH_USER,
+  SEARCH_USER_FAILED,
+  REQUEST_SEARCH_USERS,
 } from '../types';
 
 const initialState = {
@@ -25,6 +28,8 @@ const initialState = {
   updateSuccess: false,
   employeeLoading: false,
   employee: {},
+  searchLoading: false,
+  searchResult: [],
 };
 
 export default (state = initialState, action) => {
@@ -119,6 +124,24 @@ export default (state = initialState, action) => {
       return {
         ...state,
         employeeLoading: false,
+        error: action.payload.error,
+      };
+    case REQUEST_SEARCH_USERS:
+      return {
+        ...state,
+        searchResult: [],
+        searchLoading: true,
+      };
+    case SEARCH_USER:
+      return {
+        ...state,
+        searchLoading: false,
+        searchResult: action.payload.data,
+      };
+    case SEARCH_USER_FAILED:
+      return {
+        ...state,
+        searchLoading: false,
         error: action.payload.error,
       };
     default:

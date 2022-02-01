@@ -11,10 +11,11 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
-import { Link } from '@mui/material/';
+import { Link, Popover } from '@mui/material/';
 import {
   getSelfProfile,
   logoutUser,
+  searchUser,
 } from '../../../redux/action';
 import NavButton from './navButton';
 import SearchIcon from '@mui/icons-material/Search';
@@ -25,21 +26,8 @@ import {
   LocationSearch,
 } from './SearchButton';
 import logo from '../../../assets/images/logo.png';
+import SearchResult from './SearchResult';
 
-const pages = [
-  {
-    name: 'Login',
-    link: '/login',
-  },
-  {
-    name: 'Join Us',
-    link: '/signup',
-  },
-  // {
-  //   name: 'Find Freelancers',
-  //   link: '/freelancers',
-  // },
-];
 const settings = [
   'Profile',
   'Account',
@@ -54,11 +42,22 @@ const ResponsiveAppBar = ({ styles }) => {
     React.useState(null);
   const [anchorElUser, setAnchorElUser] =
     React.useState(null);
+  const [query, setQuery] = React.useState('');
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
   const { authenticated } = useSelector(
     (state) => state.auth
   );
-  const { profile } = useSelector((state) => state.users);
+  const { profile, searchLoading, searchResult } =
+    useSelector((state) => state.users);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -80,6 +79,12 @@ const ResponsiveAppBar = ({ styles }) => {
     link === 'logout'
       ? dispatch(logoutUser())
       : history.push(`/${link}`);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(searchUser(query));
+    setAnchorEl(e.currentTarget);
   };
 
   React.useEffect(() => {
@@ -134,18 +139,27 @@ const ResponsiveAppBar = ({ styles }) => {
               display: { xs: 'block', md: 'none' },
             }}
           >
-            {pages.map((page) => (
-              <MenuItem
-                key={page}
-                onClick={handleCloseNavMenu}
-              >
-                <Typography textAlign="center">
-                  <Link color="inherit" href={page.link}>
-                    {page.name}
-                  </Link>
-                </Typography>
-              </MenuItem>
-            ))}
+            <MenuItem onClick={handleCloseNavMenu}>
+              <Typography textAlign="center">
+                <Link color="inherit" href="/blog">
+                  Blog
+                </Link>
+              </Typography>
+            </MenuItem>
+            <MenuItem onClick={handleCloseNavMenu}>
+              <Typography textAlign="center">
+                <Link color="inherit" href="/login">
+                  Login
+                </Link>
+              </Typography>
+            </MenuItem>
+            <MenuItem onClick={handleCloseNavMenu}>
+              <Typography textAlign="center">
+                <Link color="inherit" href="/singup">
+                  Join Us
+                </Link>
+              </Typography>
+            </MenuItem>
           </Menu>
         </Box>
         <Box
@@ -179,10 +193,14 @@ const ResponsiveAppBar = ({ styles }) => {
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search…"
-            inputProps={{ 'aria-label': 'search' }}
-          />
+          <form onSubmit={handleSubmit}>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+              onChange={(e) => setQuery(e.target.value)}
+              value={query}
+            />
+          </form>
           <Divider orientation="vertical" flexItem />
           <LocationSearch
             placeholder="Search Location"
@@ -208,18 +226,29 @@ const ResponsiveAppBar = ({ styles }) => {
               </IconButton>
             </Tooltip>
           )}
-          {!authenticated && (
-            <Typography
-              component="div"
-              sx={{
-                display: { xs: 'none', md: 'flex' },
-                marginRight: '4.6rem',
-              }}
-            >
+          <Typography
+            component="div"
+            sx={{
+              display: { xs: 'none', md: 'flex' },
+              marginRight: '3rem',
+            }}
+          >
+            <NavButton to="/login">Blog</NavButton>
+            {!authenticated && (
               <NavButton to="/login">Login</NavButton>
-              <NavButton to="/signup">join</NavButton>
-            </Typography>
-          )}
+            )}
+            {!authenticated && (
+              <Typography
+                component="div"
+                sx={{
+                  background: '#083C1B',
+                  borderRadius: 2,
+                }}
+              >
+                <NavButton to="/signup">Join Us</NavButton>
+              </Typography>
+            )}
+          </Typography>
           <Menu
             sx={{ mt: '45px' }}
             id="menu-appbar"
@@ -252,6 +281,28 @@ const ResponsiveAppBar = ({ styles }) => {
           </Menu>
         </Box>
       </Typography>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        sx={{
+          width: '80vw',
+        }}
+      >
+        <Typography
+          sx={{ width: { sm: '95vh', md: '80vh' } }}
+        >
+          <SearchResult
+            loading={searchLoading}
+            users={searchResult}
+          />
+        </Typography>
+      </Popover>
     </Toolbar>
   );
 };

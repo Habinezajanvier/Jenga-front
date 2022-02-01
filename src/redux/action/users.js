@@ -14,6 +14,9 @@ import {
   REQUEST_UPDATE_USER,
   UPDATE_USER_FAILED,
   UPDATE_USER_SUCCESS,
+  SEARCH_USER,
+  SEARCH_USER_FAILED,
+  REQUEST_SEARCH_USERS,
 } from '../types';
 
 const { REACT_APP_BACKEND } = process.env;
@@ -113,3 +116,23 @@ export const requestEmployee =
         });
       });
   };
+
+export const searchUser = (query) => (dispatch) => {
+  dispatch({ type: REQUEST_SEARCH_USERS });
+  axios
+    .post(`${REACT_APP_BACKEND}/api/users/search`, {
+      query,
+    })
+    .then((res) => {
+      dispatch({
+        type: SEARCH_USER,
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: SEARCH_USER_FAILED,
+        payload: error.response?.data?.error,
+      });
+    });
+};
