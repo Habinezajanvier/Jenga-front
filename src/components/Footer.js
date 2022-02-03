@@ -170,7 +170,7 @@ export default function StickyFooter() {
                 className={classes.link}
                 variant="body2"
               >
-                <Link color="inherit" href="/">
+                <Link color="inherit" href="/privacy">
                   Privacy Policy
                 </Link>
               </Typography>
