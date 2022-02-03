@@ -16,6 +16,7 @@ import ProfileContent from './pages/client/Profile';
 import MyProfileContent from './pages/client/MyProfile';
 import PrivateRoute from './components/hoc/PrivateRoute';
 import CustomRoute from './components/hoc/CustomRoute';
+import AboutPage from './pages/client/About';
 
 function ClientRoutes() {
   return (
@@ -34,6 +35,7 @@ function ClientRoutes() {
         path="/profile"
         component={MyProfileContent}
       />
+      <Route exact path="/about" component={AboutPage} />
       <Route exact path="/" component={Home} />
     </>
   );

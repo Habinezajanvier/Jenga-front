@@ -233,7 +233,7 @@ const ResponsiveAppBar = ({ styles }) => {
               marginRight: '3rem',
             }}
           >
-            <NavButton to="/login">Blog</NavButton>
+            <NavButton to="/blog">Blog</NavButton>
             {!authenticated && (
               <NavButton to="/login">Login</NavButton>
             )}

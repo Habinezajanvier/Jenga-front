@@ -135,7 +135,7 @@ export default function StickyFooter() {
                 className={classes.link}
                 variant="body2"
               >
-                <Link color="inherit" href="/">
+                <Link color="inherit" href="/about">
                   About us
                 </Link>
               </Typography>
@@ -151,7 +151,7 @@ export default function StickyFooter() {
                 className={classes.link}
                 variant="body2"
               >
-                <Link color="inherit" href="/">
+                <Link color="inherit" href="/blog">
                   Blog
                 </Link>
               </Typography>
