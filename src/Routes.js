@@ -17,6 +17,7 @@ import MyProfileContent from './pages/client/MyProfile';
 import PrivateRoute from './components/hoc/PrivateRoute';
 import CustomRoute from './components/hoc/CustomRoute';
 import AboutPage from './pages/client/About';
+import PrivacyPolicy from './pages/client/Privacy';
 
 function ClientRoutes() {
   return (
@@ -37,6 +38,11 @@ function ClientRoutes() {
       />
       <Route exact path="/about" component={AboutPage} />
       <Route exact path="/" component={Home} />
+      <Route
+        exact
+        path="/privacy"
+        component={PrivacyPolicy}
+      />
     </>
   );
 }
