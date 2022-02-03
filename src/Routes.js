@@ -18,6 +18,7 @@ import PrivateRoute from './components/hoc/PrivateRoute';
 import CustomRoute from './components/hoc/CustomRoute';
 import AboutPage from './pages/client/About';
 import PrivacyPolicy from './pages/client/Privacy';
+import TermsAndConditions from './pages/client/Terms';
 
 function ClientRoutes() {
   return (
@@ -42,6 +43,11 @@ function ClientRoutes() {
         exact
         path="/privacy"
         component={PrivacyPolicy}
+      />
+      <Route
+        exact
+        path="/terms"
+        component={TermsAndConditions}
       />
     </>
   );
