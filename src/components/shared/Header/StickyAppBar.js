@@ -217,17 +217,19 @@ const ResponsiveAppBar = ({ styles }) => {
             mr: { md: 8, sm: 3 },
           }}
         >
-          <Typography
-            component="div"
-            sx={{
-              display: {
-                xs: 'none',
-                md: 'block',
-              },
-            }}
-          >
-            <NavButton to="/blog">Blog</NavButton>
-          </Typography>
+          {authenticated && profile && (
+            <Typography
+              component="div"
+              sx={{
+                display: {
+                  xs: 'none',
+                  md: 'block',
+                },
+              }}
+            >
+              <NavButton to="/blog">Blog</NavButton>
+            </Typography>
+          )}
           {authenticated && profile && (
             <Tooltip
               title={`${profile.firstname} ${profile.lastname}`}
