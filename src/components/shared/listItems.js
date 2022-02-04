@@ -6,11 +6,12 @@ import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
+// import BarChartIcon from '@mui/icons-material/BarChart';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import CategoryIcon from '@mui/icons-material/Category';
 import WorkIcon from '@mui/icons-material/Work';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import List from '@mui/material/List';
 
 export const MainListItems = () => {
@@ -60,13 +61,22 @@ export const MainListItems = () => {
         </ListItem>
         <ListItem
           button
+          onClick={() => handleClick('/admin/adverts')}
+        >
+          <ListItemIcon>
+            <AddBusinessIcon color="primary" />
+          </ListItemIcon>
+          <ListItemText primary="Adverts" />
+        </ListItem>
+        {/* <ListItem
+          button
           onClick={() => handleClick('/reports')}
         >
           <ListItemIcon>
             <BarChartIcon color="primary" />
           </ListItemIcon>
           <ListItemText primary="Reports" />
-        </ListItem>
+        </ListItem> */}
         <ListItem
           button
           onClick={() => handleClick('/employements')}

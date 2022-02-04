@@ -3,7 +3,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import Dashboard from './pages/admin/Dashboard';
 import Employements from './pages/admin/Employements';
 import Jobs from './pages/admin/Jobs';
-import Reports from './pages/admin/Reports';
+// import Reports from './pages/admin/Reports';
 import User from './pages/admin/Users';
 import SignIn from './pages/client/Signin';
 import SignUp from './pages/client/Signup';
@@ -20,6 +20,7 @@ import AboutPage from './pages/client/About';
 import PrivacyPolicy from './pages/client/Privacy';
 import TermsAndConditions from './pages/client/Terms';
 import Users from './pages/client/Users';
+import Adverts from './pages/admin/Adverts';
 
 function ClientRoutes() {
   return (
@@ -71,8 +72,8 @@ function Routes() {
       />
       <PrivateRoute path="/users" component={User} exact />
       <PrivateRoute
-        path="/reports"
-        component={Reports}
+        path="/admin/adverts"
+        component={Adverts}
         exact
       />
       <PrivateRoute

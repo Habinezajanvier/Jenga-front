@@ -13,10 +13,10 @@ import Typography from '@mui/material/Typography';
 import Categories from '../../components/Categories';
 import RecentPost from '../../components/RecentPost';
 import {
+  getAdverts,
   getCategories,
   getUsers,
 } from '../../redux/action';
-import mySlides from '../../utils/slides';
 import profits from '../../utils/profits';
 import TransitionsModal from '../../components/shared/Model';
 import HireCard from '../../components/HireCard';
@@ -53,6 +53,8 @@ const useStyles = makeStyles((theme) => ({
       textAlign: 'center',
       marginTop: '18%',
       textTransform: 'capitalize',
+      padding: '0 4rem 0 4rem',
+      fontSize: '19pt',
     },
   },
   welcomeSection: {
@@ -76,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HeroSlider = ({ classes }) => {
+const HeroSlider = ({ classes, slides }) => {
   const [value, setValue] = React.useState(0);
   // const [slides, setSlides] = React.useState();
 
@@ -95,12 +97,12 @@ const HeroSlider = ({ classes }) => {
         animationSpeed={1500}
         value={value}
         onChange={(e) => setValue(e)}
-        slides={mySlides.map((item, i) => (
+        slides={slides.map((item, i) => (
           <div
             className={classes.hero}
             key={i}
             style={{
-              backgroundImage: `url(${item.image})`,
+              backgroundImage: `url(${item.thumbnail})`,
             }}
           >
             <div className={classes.heroContent}>
@@ -109,7 +111,13 @@ const HeroSlider = ({ classes }) => {
                 variant="h3"
                 gutterBottom
               >
-                {item.title}
+                <a
+                  href={item.link}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  {item.title}
+                </a>
               </Typography>
             </div>
           </div>
@@ -117,7 +125,7 @@ const HeroSlider = ({ classes }) => {
       />
       <Dots
         value={value}
-        number={mySlides.length}
+        number={slides.length}
         onChange={(e) => setValue(e)}
       />
     </>
@@ -128,6 +136,7 @@ export default () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [openMore, setOpenMore] = React.useState(false);
+  const { adverts } = useSelector((state) => state.adverts);
   // const [homeUsers, setHomeUsers] = React.useState([]);
   const [user, setUser] = React.useState({});
   const { categories } = useSelector(
@@ -145,14 +154,22 @@ export default () => {
   React.useEffect(() => {
     dispatch(getCategories());
     dispatch(getUsers());
+    dispatch(getAdverts());
   }, [dispatch]);
   return (
     <Box className={classes.root}>
       <>
         <Typography component="div" sx={{}}>
-          <HeroSlider classes={classes} />
+          <HeroSlider classes={classes} slides={adverts} />
         </Typography>
-
+        {categories.length !== 0 && (
+          <Categories categories={categories} />
+        )}
+        <RecentPost
+          categories={categories}
+          openModel={setOpenMore}
+          setUser={setUser}
+        />
         <div>
           <Grid
             container
@@ -186,14 +203,6 @@ export default () => {
             ))}
           </Grid>
         </div>
-        {categories.length !== 0 && (
-          <Categories categories={categories} />
-        )}
-        <RecentPost
-          categories={categories}
-          openModel={setOpenMore}
-          setUser={setUser}
-        />
       </>
       <TransitionsModal
         open={openMore}
