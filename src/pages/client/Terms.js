@@ -4,6 +4,7 @@ import termsMd from '../../assets/documents/terms.md';
 import Markdown from '../../components/Privacy/Markdown';
 
 export default function TermsAndConditions() {
+  document.title = 'Terms and Conditions | Jenga';
   const [termsContent, setTermsContent] =
     React.useState('');
 

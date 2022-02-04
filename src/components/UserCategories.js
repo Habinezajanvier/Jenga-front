@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Categories = ({ categories }) => {
+const Categories = ({ categories, action = undefined }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openedPopoverId, setOponedPopoverId] =
@@ -136,16 +136,15 @@ const Categories = ({ categories }) => {
                       <MenuList>
                         {item.skills.map((item) => (
                           <MenuItem>
-                            <a
-                              href={`/workers?skillid=${item.id}`}
+                            <Typography
+                              key={item.id}
+                              sx={{ p: 1 }}
+                              onClick={() =>
+                                action(item.id)
+                              }
                             >
-                              <Typography
-                                key={item.id}
-                                sx={{ p: 1 }}
-                              >
-                                {item.name}
-                              </Typography>
-                            </a>
+                              {item.name}
+                            </Typography>
                           </MenuItem>
                         ))}
                       </MenuList>

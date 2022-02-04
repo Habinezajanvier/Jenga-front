@@ -155,6 +155,14 @@ export default function StickyFooter() {
                   Blog
                 </Link>
               </Typography>
+              <Typography
+                className={classes.link}
+                variant="body2"
+              >
+                <Link color="inherit" href="/workers">
+                  Freelancers
+                </Link>
+              </Typography>
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>

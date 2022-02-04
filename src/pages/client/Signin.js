@@ -16,6 +16,7 @@ import Container from '@mui/material/Container';
 import { loginAction } from '../../redux/action';
 
 export default function SignIn() {
+  document.title = 'Login | Jenga';
   const dispatch = useDispatch();
   const history = useHistory();
   const { authenticated } = useSelector(
