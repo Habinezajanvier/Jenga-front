@@ -136,3 +136,21 @@ export const searchUser = (query) => (dispatch) => {
       });
     });
 };
+
+export const getUsersBySkill = (skillId) => (dispatch) => {
+  dispatch({ type: REQUEST_GET_USERS });
+  axios
+    .get(`${REACT_APP_BACKEND}/api/skills/${skillId}/users`)
+    .then((res) => {
+      dispatch({
+        type: GET_USERS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: GET_USERS_FAILED,
+        payload: err.response?.data,
+      });
+    });
+};

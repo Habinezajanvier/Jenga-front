@@ -19,6 +19,7 @@ import CustomRoute from './components/hoc/CustomRoute';
 import AboutPage from './pages/client/About';
 import PrivacyPolicy from './pages/client/Privacy';
 import TermsAndConditions from './pages/client/Terms';
+import Users from './pages/client/Users';
 
 function ClientRoutes() {
   return (
@@ -49,6 +50,7 @@ function ClientRoutes() {
         path="/terms"
         component={TermsAndConditions}
       />
+      <Route exact path="/workers" component={Users} />
     </>
   );
 }

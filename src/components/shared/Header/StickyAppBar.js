@@ -210,7 +210,24 @@ const ResponsiveAppBar = ({ styles }) => {
           />
         </Search>
 
-        <Box sx={{ flexGrow: 0, mr: { md: 8, sm: 3 } }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexGrow: 0,
+            mr: { md: 8, sm: 3 },
+          }}
+        >
+          <Typography
+            component="div"
+            sx={{
+              display: {
+                xs: 'none',
+                md: 'block',
+              },
+            }}
+          >
+            <NavButton to="/blog">Blog</NavButton>
+          </Typography>
           {authenticated && profile && (
             <Tooltip
               title={`${profile.firstname} ${profile.lastname}`}
@@ -233,7 +250,9 @@ const ResponsiveAppBar = ({ styles }) => {
               marginRight: '3rem',
             }}
           >
-            <NavButton to="/blog">Blog</NavButton>
+            {!authenticated && (
+              <NavButton to="/blog">Blog</NavButton>
+            )}
             {!authenticated && (
               <NavButton to="/login">Login</NavButton>
             )}

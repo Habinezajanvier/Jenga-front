@@ -4,6 +4,7 @@ import privacyMd from '../../assets/documents/privacy.md';
 import Markdown from '../../components/Privacy/Markdown';
 
 export default function PrivacyPolicy() {
+  document.title = 'Privacy Policy | Jenga';
   const [privacyContent, setPrivacyContent] =
     React.useState('');
 

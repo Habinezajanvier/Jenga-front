@@ -9,6 +9,7 @@ import syncImage from '../../assets/images/sync.png';
 import distanceImage from '../../assets/images/distancing.png';
 
 export default function AboutPage() {
+  document.title = 'About | Jenga';
   return (
     <Box
       component="main"

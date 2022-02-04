@@ -39,6 +39,7 @@ const sidebar = {
 
 export default function Blog() {
   const [mdPosts, setPosts] = React.useState([]);
+  document.title = 'Blog | Jenga';
 
   React.useEffect(() => {
     posts.map((post) =>

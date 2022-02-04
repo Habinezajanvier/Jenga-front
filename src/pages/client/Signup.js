@@ -14,6 +14,7 @@ import Container from '@mui/material/Container';
 import { signupAction } from '../../redux/action';
 
 export default function SignUp() {
+  document.title = 'Signup | Jenga';
   const dispatch = useDispatch();
   const [userData, setUserData] = React.useState({
     firstname: '',
