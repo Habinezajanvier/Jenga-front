@@ -20,7 +20,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import {
   MainListItems,
-  SecondaryListItems,
+  // SecondaryListItems,
 } from './listItems';
 import {
   getSelfProfile,
@@ -217,7 +217,7 @@ function DashboardLayout({ name, children }) {
           <Divider />
           <MainListItems />
           <Divider />
-          <SecondaryListItems />
+          {/* <SecondaryListItems /> */}
         </Drawer>
         <Box
           component="main"
