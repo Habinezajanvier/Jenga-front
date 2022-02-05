@@ -32,7 +32,9 @@ export default function AdvertContent({
           {adverts.map((row) => (
             <TableRow key={row.id}>
               <TableCell>
-                {moment(row.createdAt).format('MMM Do YY')}
+                {moment(row.createdAt).format(
+                  'MMM Do, YYYY'
+                )}
               </TableCell>
               <TableCell>
                 <Avatar
