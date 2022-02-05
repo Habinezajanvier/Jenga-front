@@ -59,6 +59,27 @@ export const signupAction = (userData) => (dispatch) => {
     });
 };
 
+export const easyApply =
+  (userData, userSkills) => (dispatch) => {
+    dispatch({ type: REQUEST_SIGNUP });
+
+    axios
+      .post(`${REACT_APP_BACKEND}/api/auth/easy-apply`, {
+        userData,
+        userSkills,
+      })
+      .then((res) => {
+        window.location = '/';
+      })
+      .catch((error) => {
+        dispatch({
+          type: AUTH_FAILIED,
+          payload: error.response?.data?.error,
+        });
+        toast.error(error.response?.data?.error);
+      });
+  };
+
 export const setAuthorization = (token) => {
   const IdToken = token;
   localStorage.setItem('IdToken', IdToken);

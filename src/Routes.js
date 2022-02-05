@@ -21,6 +21,7 @@ import PrivacyPolicy from './pages/client/Privacy';
 import TermsAndConditions from './pages/client/Terms';
 import Users from './pages/client/Users';
 import Adverts from './pages/admin/Adverts';
+import Register from './pages/client/Register';
 
 function ClientRoutes() {
   return (
@@ -28,6 +29,11 @@ function ClientRoutes() {
       <Headers />
       <Route exact path="/login" component={SignIn} />
       <Route exact path="/signup" component={SignUp} />
+      <Route
+        exact
+        path="/easy-apply"
+        component={Register}
+      />
       <Route exact path="/blog" component={Blog} />
       <CustomRoute
         exact

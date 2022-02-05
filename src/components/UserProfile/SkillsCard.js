@@ -82,7 +82,7 @@ export default function SKillsCard({ skills, userId }) {
               <IconButton onClick={handleClick}>
                 <AddIcon color="primary" />
               </IconButton>
-              {sortedSkills.length !== 0 && (
+              {
                 <Popover
                   id={popoverId}
                   open={open}
@@ -94,21 +94,21 @@ export default function SKillsCard({ skills, userId }) {
                   }}
                 >
                   <MenuList>
-                    {sortedSkills.map((item) => (
+                    {sortedSkills?.map((item) => (
                       <MenuItem
                         onClick={() => assignSkill(item.id)}
                       >
                         <Typography
-                          key={item.id}
+                          key={item?.id}
                           sx={{ p: 1 }}
                         >
-                          {item.name}
+                          {item?.name}
                         </Typography>
                       </MenuItem>
                     ))}
                   </MenuList>
                 </Popover>
-              )}
+              }
             </Typography>
           )}
         </Typography>
