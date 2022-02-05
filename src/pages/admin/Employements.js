@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
@@ -6,8 +7,22 @@ import Employement from '../../components/employements/Employment';
 import DashboardLayout from '../../components/shared/DashboardLayout';
 import { Typography } from '@mui/material';
 import Number from '../../components/employements/Numbers';
+import { getOffers, updateOffer } from '../../redux/action';
 
 function EmployementsContent() {
+  const dispatch = useDispatch();
+
+  const { offers, updateSuccess } = useSelector(
+    (state) => state.offers
+  );
+
+  React.useEffect(() => {
+    dispatch(getOffers());
+  }, [dispatch, updateSuccess]);
+
+  const handleUpdate = (id, data) => {
+    dispatch(updateOffer(id, data));
+  };
   return (
     <Grid container spacing={3}>
       <Grid md={6} sm={12}>
@@ -32,7 +47,7 @@ function EmployementsContent() {
       <Grid md={3} sm={6} xs={12}>
         <Number
           title="Number of employements"
-          number="12000"
+          number={offers?.length}
         />
       </Grid>
       <Grid md={3} sm={6} xs={12}>
@@ -50,7 +65,12 @@ function EmployementsContent() {
             flexDirection: 'column',
           }}
         >
-          <Employement />
+          {offers.length !== 0 && (
+            <Employement
+              offers={offers}
+              action={handleUpdate}
+            />
+          )}
         </Paper>
       </Grid>
     </Grid>

@@ -4,6 +4,7 @@ import users from './users';
 import categories from './categories';
 import skills from './skills';
 import adverts from './adverts';
+import offers from './offer';
 
 export default combineReducers({
   auth,
@@ -11,4 +12,5 @@ export default combineReducers({
   categories,
   skills,
   adverts,
+  offers,
 });
