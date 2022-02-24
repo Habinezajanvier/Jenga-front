@@ -1,8 +1,9 @@
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Dashboard from './pages/admin/Dashboard';
 import Employements from './pages/admin/Employements';
 import Jobs from './pages/admin/Jobs';
+import StickyFooter from './components/Footer';
 // import Reports from './pages/admin/Reports';
 import User from './pages/admin/Users';
 import SignIn from './pages/client/Signin';
@@ -58,6 +59,7 @@ function ClientRoutes() {
         component={TermsAndConditions}
       />
       <Route exact path="/workers" component={Users} />
+      <StickyFooter />
     </>
   );
 }
@@ -92,22 +94,6 @@ function Routes() {
         component={UserProfile}
       />
       <ClientRoutes />
-      <Route path="*" exact>
-        <div className="container py-5">
-          <div className="row justify-content-center">
-            <div className="col-md-4">
-              <h2>404 Not Found</h2>
-              <p>
-                Something went wrong we couldn't find what
-                your looking for
-              </p>
-              <Link to="/" className="btn btn-primary">
-                Go Back Home
-              </Link>
-            </div>
-          </div>
-        </div>
-      </Route>
     </Switch>
   );
 }
