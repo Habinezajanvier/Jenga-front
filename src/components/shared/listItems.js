@@ -57,7 +57,7 @@ export const MainListItems = () => {
           <ListItemIcon>
             <CategoryIcon color="primary" />
           </ListItemIcon>
-          <ListItemText primary="Categories" />
+          <ListItemText primary="Categories & Skills" />
         </ListItem>
         <ListItem
           button

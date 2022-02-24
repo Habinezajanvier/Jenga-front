@@ -8,20 +8,17 @@ import TextField from '@mui/material/TextField';
 // import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { createSkill } from '../../redux/action';
 import Loading from '../shared/Loaders/SmallLoader';
-import {
-  createCategory,
-  updateCategory,
-} from '../../redux/action';
 
-const AddCateogyForm = ({ previous }) => {
+const AddSkillForm = ({ previous }) => {
   const dispatch = useDispatch();
   const [category, setCatgory] = React.useState({
     name: '',
     description: '',
   });
-  const { createLoading, updateLoading } = useSelector(
-    (state) => state.categories
+  const { createLoading } = useSelector(
+    (state) => state.skills
   );
 
   const handleChange = ({ target }) => {
@@ -31,20 +28,12 @@ const AddCateogyForm = ({ previous }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    Boolean(previous)
-      ? dispatch(updateCategory(category, previous.id))
-      : dispatch(createCategory(category));
+    dispatch(createSkill(category));
   };
-  React.useEffect(() => {
-    if (Boolean(previous)) {
-      setCatgory({ ...previous });
-    }
-  }, [previous]);
   return (
     <>
       <Typography component="h1" variant="h5">
-        {Boolean(previous) ? 'Update ' : 'Create new '}
-        category
+        Create new Skill
       </Typography>
       <Box
         component="form"
@@ -57,7 +46,7 @@ const AddCateogyForm = ({ previous }) => {
           required
           fullWidth
           id="name"
-          label="Category Name"
+          label="Skill Name"
           name="name"
           autoComplete="name"
           autoFocus
@@ -82,15 +71,11 @@ const AddCateogyForm = ({ previous }) => {
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
         >
-          {createLoading || updateLoading ? (
-            <Loading />
-          ) : (
-            'Save'
-          )}
+          {createLoading ? <Loading /> : 'Save'}
         </Button>
       </Box>
     </>
   );
 };
 
-export default AddCateogyForm;
+export default AddSkillForm;

@@ -6,6 +6,9 @@ import {
   REQUEST_ADD_SKILL_USER,
   ADD_SKILL_TO_USER,
   ADD_SKILL_TO_USER_FAILED,
+  REQUEST_CREATE_SKILL,
+  CREATE_SKILL,
+  CREATE_SKILL_FAILED,
 } from '../types';
 
 const initialState = {
@@ -16,6 +19,8 @@ const initialState = {
   loading: null,
   assignLoading: null,
   assignSuccess: false,
+  createLoading: false,
+  success: false,
 };
 
 export default (state = initialState, action) => {
@@ -61,6 +66,26 @@ export default (state = initialState, action) => {
       return {
         ...state,
         assignLoading: false,
+        error: action.payload.error,
+      };
+
+    case REQUEST_CREATE_SKILL:
+      return {
+        ...state,
+        createLoading: true,
+        success: false,
+      };
+    case CREATE_SKILL:
+      return {
+        ...state,
+        createLoading: false,
+        success: true,
+        message: action.payload.message,
+      };
+    case CREATE_SKILL_FAILED:
+      return {
+        ...state,
+        createLoading: false,
         error: action.payload.error,
       };
 
