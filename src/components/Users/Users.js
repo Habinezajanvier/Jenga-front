@@ -24,7 +24,6 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import moment from 'moment';
 
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -76,6 +75,12 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: 'last Name',
+  },
+  {
+    id: 'gender',
+    numeric: false,
+    disablePadding: false,
+    label: 'Gender',
   },
   {
     id: 'email',
@@ -385,6 +390,9 @@ export default function UsersTable({ users, history }) {
                       </TableCell>
                       <TableCell align="left">
                         {row.lastname}
+                      </TableCell>
+                      <TableCell align="left">
+                        {row.gender}
                       </TableCell>
                       <TableCell align="right">
                         {row.email}

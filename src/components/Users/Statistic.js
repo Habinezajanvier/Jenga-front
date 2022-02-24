@@ -13,6 +13,7 @@ export default function Number({ data, title }) {
           display: 'flex',
           flexDirection: 'column',
           marginLeft: 1,
+          marginTop: 12,
           minHeight: 200,
         }}
       >

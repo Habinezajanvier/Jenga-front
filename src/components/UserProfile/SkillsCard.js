@@ -18,10 +18,9 @@ import {
 export default function SKillsCard({ skills, userId }) {
   const dispatch = useDispatch();
   const [id, setId] = React.useState('');
-  const [sortedSkills, setSortedSkills] = React.useState(
-    []
-  );
-  const { skills: allSkills, assignSuccess } = useSelector(
+  const [selectedSkills, setSelectedSkills] =
+    React.useState([]);
+  const { skills: allSkills } = useSelector(
     (state) => state.skills
   );
   React.useEffect(() => {
@@ -43,19 +42,14 @@ export default function SKillsCard({ skills, userId }) {
   const open = Boolean(anchorEl);
   const popoverId = open ? 'simple-popover' : undefined;
 
-  React.useEffect(() => {
-    let mySkills = [];
-    skills.forEach((skill) => {
-      mySkills = allSkills.filter(
-        (item) => item.id !== skill.id
-      );
-    });
-    setSortedSkills(mySkills);
-  }, [allSkills, skills, assignSuccess]);
-
   const assignSkill = (skillId) => {
     dispatch(assignUserSkill(skillId, id));
+    setSelectedSkills([...selectedSkills, skillId]);
   };
+
+  React.useEffect(() => {
+    setSelectedSkills([...skills.map((item) => item.id)]);
+  }, [skills]);
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -94,9 +88,12 @@ export default function SKillsCard({ skills, userId }) {
                   }}
                 >
                   <MenuList>
-                    {sortedSkills?.map((item) => (
+                    {allSkills?.map((item) => (
                       <MenuItem
                         onClick={() => assignSkill(item.id)}
+                        disabled={selectedSkills.includes(
+                          item.id
+                        )}
                       >
                         <Typography
                           key={item?.id}

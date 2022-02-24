@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
 import EditIcon from '@mui/icons-material/Edit';
 
-const ProfileDescription = ({ description }) => {
+const ProfileDescription = ({ description, openModal }) => {
   return (
     <>
       <Paper
@@ -15,14 +15,7 @@ const ProfileDescription = ({ description }) => {
         }}
       >
         <Typography component="p" variant="h6">
-          Cras mattis consectetur purus sit amet fermentum.
-          Cras justo odio, dapibus ac facilisis in, egestas
-          eget quam. Morbi leo risus, porta ac consectetur
-          ac, vestibulum at eros. Praesent commodo cursus
-          magna, vel scelerisque nisl consectetur et. Cras
-          mattis consectetur purus sit amet fermentum. Cras
-          justo odio, dapibus ac facilisis in, egestas eget
-          quam
+          {description}
         </Typography>
         <Fab
           sx={{
@@ -32,6 +25,7 @@ const ProfileDescription = ({ description }) => {
           }}
           color="primary"
           aria-label="edit"
+          onClick={() => openModal(true)}
         >
           <EditIcon />
         </Fab>
