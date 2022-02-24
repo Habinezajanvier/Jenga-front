@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
-import StickyFooter from './components/Footer';
+// import StickyFooter from './components/Footer';
 import Routes from './Routes';
 import store from './redux/store';
 import { ToastContainer, toast } from 'react-toastify';
@@ -60,7 +60,7 @@ function App() {
       <Router>
         <Routes />
       </Router>
-      <StickyFooter />
+      {/* <StickyFooter /> */}
       <ToastContainer />
     </Provider>
   );

@@ -11,65 +11,37 @@ import {
 import Title from '../shared/Title';
 import moment from 'moment';
 
-// Generate Sales Data
-function createData(time, amount) {
+// Generate graph Data
+function createData(month, data) {
+  const time = moment()
+    .subtract(month, 'month')
+    .format('MMMM');
+  const amount = data.filter((value) =>
+    moment(value.createdAt).isSame(
+      moment().subtract(month, 'month'),
+      'month'
+    )
+  ).length;
   return { time, amount };
 }
 
-const data = [
-  createData(
-    moment().subtract(11, 'month').format('MMMM'),
-    1
-  ),
-  createData(
-    moment().subtract(10, 'month').format('MMMM'),
-    12
-  ),
-  createData(
-    moment().subtract(9, 'month').format('MMMM'),
-    16
-  ),
-  createData(
-    moment().subtract(8, 'month').format('MMMM'),
-    5
-  ),
-  createData(
-    moment().subtract(7, 'month').format('MMMM'),
-    7
-  ),
-  createData(
-    moment().subtract(6, 'month').format('MMMM'),
-    9
-  ),
-  createData(
-    moment().subtract(5, 'month').format('MMMM'),
-    10
-  ),
-  createData(
-    moment().subtract(4, 'month').format('MMMM'),
-    11
-  ),
-  createData(
-    moment().subtract(3, 'month').format('MMMM'),
-    2
-  ),
-  createData(
-    moment().subtract(2, 'month').format('MMMM'),
-    2
-  ),
-  createData(
-    moment().subtract(1, 'month').format('MMMM'),
-    10
-  ),
-  createData(
-    moment().subtract(0, 'month').format('MMMM'),
-    13
-  ),
-];
-
-export default function Chart() {
+export default function Chart({ offers }) {
   const theme = useTheme();
 
+  const data = [
+    createData(11, offers),
+    createData(10, offers),
+    createData(9, offers),
+    createData(8, offers),
+    createData(7, offers),
+    createData(6, offers),
+    createData(5, offers),
+    createData(4, offers),
+    createData(3, offers),
+    createData(2, offers),
+    createData(1, offers),
+    createData(0, offers),
+  ];
   return (
     <React.Fragment>
       <Title>This Year</Title>

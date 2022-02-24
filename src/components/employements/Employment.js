@@ -27,7 +27,7 @@ export default function Employement({ offers, action }) {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Updated</TableCell>
+            <TableCell>Created</TableCell>
             <TableCell>Employer</TableCell>
             <TableCell>Employee</TableCell>
             <TableCell>Status</TableCell>
