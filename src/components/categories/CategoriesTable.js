@@ -19,6 +19,7 @@ import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import Tooltip from '@mui/material/Tooltip';
 import moment from 'moment';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import CircularProgress from '@mui/material/CircularProgress';
 import Popover from '@mui/material/Popover';
 import {
   MenuItem,
@@ -28,14 +29,16 @@ import {
 import {
   getSkills,
   assignCategorySkill,
+  deleteCategory,
 } from '../../redux/action';
 
 function Row(props) {
-  const { category, index } = props;
+  const { category, index, viewMore } = props;
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState([]);
   const [disabled, setDisabled] = React.useState([]);
+  const [delId, setDelId] = React.useState('');
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -58,6 +61,9 @@ function Row(props) {
   const { skills: allSkills } = useSelector(
     (state) => state.skills
   );
+  const { deleteLoading } = useSelector(
+    (state) => state.categories
+  );
   React.useEffect(() => {
     dispatch(getSkills());
     setDisabled([
@@ -67,6 +73,11 @@ function Row(props) {
 
   const handleSubmit = () =>
     dispatch(assignCategorySkill(selected, category.id));
+
+  const handleDelete = (id) => {
+    setDelId(id);
+    dispatch(deleteCategory(id));
+  };
 
   const openPopover = Boolean(anchorEl);
   const id = openPopover ? 'simple-popover' : undefined;
@@ -97,15 +108,23 @@ function Row(props) {
         <TableCell align="right">
           <>
             <Tooltip title="More about">
-              <IconButton onClick={() => props.viewMore()}>
+              <IconButton
+                onClick={() => viewMore(category)}
+              >
                 <ReadMoreIcon color="primary" />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Delete">
-              <IconButton>
-                <DeleteIcon color="danger" />
-              </IconButton>
-            </Tooltip>
+            {deleteLoading && category.id === delId ? (
+              <CircularProgress color="danger" />
+            ) : (
+              <Tooltip title="Delete">
+                <IconButton
+                  onClick={() => handleDelete(category.id)}
+                >
+                  <DeleteIcon color="danger" />
+                </IconButton>
+              </Tooltip>
+            )}
           </>
         </TableCell>
 
@@ -241,7 +260,10 @@ function Row(props) {
   );
 }
 
-export default function CategoriesTable({ categories }) {
+export default function CategoriesTable({
+  categories,
+  viewMore,
+}) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -260,6 +282,7 @@ export default function CategoriesTable({ categories }) {
               key={category.id}
               index={index}
               category={category}
+              viewMore={viewMore}
             />
           ))}
         </TableBody>

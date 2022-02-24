@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import {
   REQUEST_GET_SKILLS,
   GET_ALL_SKILLS,
@@ -6,6 +7,9 @@ import {
   REQUEST_ADD_SKILL_USER,
   ADD_SKILL_TO_USER,
   ADD_SKILL_TO_USER_FAILED,
+  REQUEST_CREATE_SKILL,
+  CREATE_SKILL,
+  CREATE_SKILL_FAILED,
 } from '../types';
 
 const { REACT_APP_BACKEND } = process.env;
@@ -49,3 +53,24 @@ export const assignUserSkill =
         });
       });
   };
+
+export const createSkill = (data) => (dispatch) => {
+  dispatch({ type: REQUEST_CREATE_SKILL });
+  axios
+    .post(`${REACT_APP_BACKEND}/api/skills`, data)
+    .then((res) => {
+      toast.success(res.data.message);
+      dispatch({
+        type: CREATE_SKILL,
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({
+        type: CREATE_SKILL_FAILED,
+        payload: error.response?.data,
+      });
+      toast.error(error.response?.data?.error);
+    });
+};
