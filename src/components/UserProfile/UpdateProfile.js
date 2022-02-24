@@ -155,15 +155,13 @@ export default function UpdateUserProfileForm({
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                //   value={age}
+                name="gender"
+                value={userData.gender}
                 label="Age"
-                //   onChange={handleChange}
+                onChange={handleChange}
               >
-                <MenuItem value={10}>Female</MenuItem>
-                <MenuItem value={20}>Male</MenuItem>
-                <MenuItem value={30}>
-                  Prefer not to tell
-                </MenuItem>
+                <MenuItem value="Female">Female</MenuItem>
+                <MenuItem value="Male">Male</MenuItem>
               </Select>
             </FormControl>
           </Grid>

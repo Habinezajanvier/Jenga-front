@@ -266,7 +266,9 @@ const ResponsiveAppBar = ({ styles }) => {
                   borderRadius: 2,
                 }}
               >
-                <NavButton to="/signup">Join Us</NavButton>
+                <NavButton to="/easy-apply">
+                  Join Us
+                </NavButton>
               </Typography>
             )}
           </Typography>

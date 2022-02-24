@@ -9,7 +9,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import portrait from '../../assets/images/portrait.png';
 import moment from 'moment';
 
-export default function ProfileCard({ user }) {
+export default function ProfileCard({ user, openModel }) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -91,7 +91,7 @@ export default function ProfileCard({ user }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <IconButton>
+        <IconButton onClick={() => openModel(true)}>
           <EditIcon color="primary" />
         </IconButton>
       </CardActions>

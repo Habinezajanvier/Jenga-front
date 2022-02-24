@@ -9,7 +9,7 @@ import PeopleIcon from '@mui/icons-material/People';
 // import BarChartIcon from '@mui/icons-material/BarChart';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import CategoryIcon from '@mui/icons-material/Category';
-import WorkIcon from '@mui/icons-material/Work';
+// import WorkIcon from '@mui/icons-material/Work';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import List from '@mui/material/List';
@@ -32,7 +32,7 @@ export const MainListItems = () => {
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItem>
-        <ListItem
+        {/* <ListItem
           button
           onClick={() => handleClick('/jobs')}
         >
@@ -40,7 +40,7 @@ export const MainListItems = () => {
             <WorkIcon color="primary" />
           </ListItemIcon>
           <ListItemText primary="Jobs" />
-        </ListItem>
+        </ListItem> */}
         <ListItem
           button
           onClick={() => handleClick('/users')}

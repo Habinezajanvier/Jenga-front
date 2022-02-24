@@ -8,47 +8,54 @@ import DashboardLayout from '../../components/shared/DashboardLayout';
 import { Typography } from '@mui/material';
 import Statistics from '../../components/Users/Statistic';
 import VerticalChart from '../../components/Users/Barchart';
-import { getUsers } from '../../redux/action';
+import { getUsers, getSkills } from '../../redux/action';
 
 function JobContent() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { users } = useSelector((state) => state.users);
+  const { skills } = useSelector((state) => state.skills);
+  const maleUsers = users.filter(
+    (user) => user.gender?.toLowerCase() === 'male'
+  ).length;
+  const femaleUsers = users.filter(
+    (user) => user.gender?.toLowerCase() === 'female'
+  ).length;
   const dataGender = {
-    labels: [`Female (50%)`, `Male (60%)`],
+    labels: ['Female', 'Male'],
     datasets: [
       {
         label: '# of Votes',
-        data: [50, 60],
+        data: [femaleUsers ?? 0, maleUsers ?? 0],
         backgroundColor: ['#3E8E7E', '#9C433D'],
         borderColor: ['#3E8E7E', '#9C433D'],
         borderWidth: 1,
       },
     ],
   };
-  const dataRole = {
-    labels: [`Employer (50%)`, `Employee (60%)`],
-    datasets: [
-      {
-        label: '# of Votes',
-        data: [50, 60],
-        backgroundColor: ['#3E8E7E', '#9C433D'],
-        borderColor: ['#3E8E7E', '#9C433D'],
-        borderWidth: 1,
-      },
-    ],
-  };
+  // const dataRole = {
+  //   labels: [`Employer (50%)`, `Employee (60%)`],
+  //   datasets: [
+  //     {
+  //       label: '# of Votes',
+  //       data: [50, 60],
+  //       backgroundColor: ['#3E8E7E', '#9C433D'],
+  //       borderColor: ['#3E8E7E', '#9C433D'],
+  //       borderWidth: 1,
+  //     },
+  //   ],
+  // };
+  const verticalData = skills.slice(0, 8).reverse();
   const dataEmployers = {
-    labels: [
-      'software dev',
-      'front dev',
-      'backend dev',
-      'Drivers',
-    ],
+    labels: [...verticalData.map((skill) => skill.name)],
     datasets: [
       {
         label: 'Users per employements',
-        data: [50, 60, 70, 10],
+        data: [
+          ...verticalData.map(
+            (skill) => skill.skills.length
+          ),
+        ],
         backgroundColor: ['#3E8E7E'],
         // borderColor: ['#cf1b33', '#078ece'],
         borderWidth: 1,
@@ -58,10 +65,11 @@ function JobContent() {
 
   React.useEffect(() => {
     dispatch(getUsers());
+    dispatch(getSkills());
   }, [dispatch]);
   return (
     <Grid container spacing={3}>
-      <Grid md={6} sm={12}>
+      <Grid md={8} sm={12}>
         <Typography
           component="div"
           sx={{
@@ -87,12 +95,12 @@ function JobContent() {
           data={dataGender}
         />
       </Grid>
-      <Grid md={3} sm={6} xs={12}>
+      {/* <Grid md={3} sm={6} xs={12}>
         <Statistics
           title="Users by Roles"
           data={dataRole}
         />
-      </Grid>
+      </Grid> */}
       <Grid item xs={12}>
         <Paper
           sx={{
