@@ -11,3 +11,6 @@ a:hover {
   text-decoration: none !important;
   color: inherit;
 }
+/* .MuiCardMedia-img {
+  object-fit: contain !important;
+} */
