@@ -13,6 +13,16 @@ import SendIcon from '@mui/icons-material/Send';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Title from '../shared/Title';
 import Loading from '../shared/Loaders/SmallLoader';
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import { styled } from '@mui/material/styles';
+import { storage } from '../../firebase/config';
+import { toast } from 'react-toastify';
+import CircularStatic from '../shared/Loaders/ProgressLoader';
+
+const Input = styled('input')({
+  display: 'none',
+});
 
 export default function UpdateUserProfileForm({
   profile,
@@ -21,6 +31,7 @@ export default function UpdateUserProfileForm({
 }) {
   const dispatch = useDispatch();
   const [userData, setUserData] = React.useState({});
+  const [progress, setProgress] = React.useState(0);
   const { updateLoading } = useSelector(
     (state) => state.users
   );
@@ -60,6 +71,7 @@ export default function UpdateUserProfileForm({
       setUserData((user) => ({
         ...user,
         [field.name]: profile[field.name],
+        profileImage: profile.profileImage,
       }))
     );
   }, [profile]);
@@ -72,6 +84,37 @@ export default function UpdateUserProfileForm({
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(action(profile.id, userData));
+  };
+
+  const onFileChange = (e) => {
+    const selected = e.target.files[0];
+    const accepted = ['image/png', 'image/jpeg'];
+
+    if (selected && accepted.includes(selected.type)) {
+      const storageRef = storage.ref(selected.name);
+      storageRef.put(selected).on(
+        'state_changed',
+        (snap) => {
+          let percentage =
+            (snap.bytesTransferred / snap.totalBytes) * 100;
+          setProgress(percentage);
+        },
+        (error) => {
+          console.log(error);
+        },
+        async () => {
+          const url = await storageRef.getDownloadURL();
+          setUserData((item) => ({
+            ...item,
+            profileImage: url,
+          }));
+          setProgress(null);
+        }
+      );
+    } else {
+      const errorMsg = 'Selected file is not an image type';
+      toast.error(errorMsg);
+    }
   };
 
   return (
@@ -91,6 +134,7 @@ export default function UpdateUserProfileForm({
           component="div"
           sx={{
             display: 'flex',
+            alignItems: 'center',
             m: { md: 2, sm: 0.2 },
             mb: 4,
             '& .MuiAvatar-root': {
@@ -99,9 +143,28 @@ export default function UpdateUserProfileForm({
           }}
         >
           <Avatar
-            src={profile.profileImage}
+            src={userData.profileImage}
             alt="John Doe"
           />
+          {progress ? (
+            <CircularStatic progress={progress} />
+          ) : (
+            <label htmlFor="icon-button-file">
+              <Input
+                accept="image/*"
+                id="icon-button-file"
+                type="file"
+                onChange={onFileChange}
+              />
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="span"
+              >
+                <PhotoCamera sx={{ fontSize: 40 }} />
+              </IconButton>
+            </label>
+          )}
           <Avatar
             sx={{
               bgcolor: '#9C433D',
@@ -184,7 +247,7 @@ export default function UpdateUserProfileForm({
               onClick={() => setModel(false)}
               sx={{
                 display: {
-                  md: 'inline',
+                  md: 'flex',
                   sm: 'none',
                   xs: 'none',
                 },
