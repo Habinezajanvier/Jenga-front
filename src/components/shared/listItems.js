@@ -10,6 +10,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import CategoryIcon from '@mui/icons-material/Category';
 // import WorkIcon from '@mui/icons-material/Work';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import List from '@mui/material/List';
@@ -67,6 +68,15 @@ export const MainListItems = () => {
             <AddBusinessIcon color="primary" />
           </ListItemIcon>
           <ListItemText primary="Adverts" />
+        </ListItem>
+        <ListItem
+          button
+          onClick={() => handleClick('/admin/feeds')}
+        >
+          <ListItemIcon>
+            <AutoStoriesIcon color="primary" />
+          </ListItemIcon>
+          <ListItemText primary="Feeds" />
         </ListItem>
         {/* <ListItem
           button

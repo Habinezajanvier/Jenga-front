@@ -2,11 +2,6 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@mui/styles';
-import Carousel, {
-  // slidesToShowPlugin,
-  autoplayPlugin,
-  Dots,
-} from '@brainhubeu/react-carousel';
 import Box from '@mui/material/Box';
 import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
@@ -20,6 +15,7 @@ import {
 import profits from '../../utils/profits';
 import TransitionsModal from '../../components/shared/Model';
 import HireCard from '../../components/HireCard';
+import HeroSlider from '../../components/Slider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,60 +74,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HeroSlider = ({ classes, slides }) => {
-  const [value, setValue] = React.useState(0);
-  // const [slides, setSlides] = React.useState();
-
-  return (
-    <>
-      <Carousel
-        plugins={[
-          'infinite',
-          {
-            resolve: autoplayPlugin,
-            options: {
-              interval: 5000,
-            },
-          },
-        ]}
-        animationSpeed={1500}
-        value={value}
-        onChange={(e) => setValue(e)}
-        slides={slides.map((item, i) => (
-          <div
-            className={classes.hero}
-            key={i}
-            style={{
-              backgroundImage: `url(${item.thumbnail})`,
-            }}
-          >
-            <div className={classes.heroContent}>
-              <Typography
-                component="h4"
-                variant="h3"
-                gutterBottom
-              >
-                <a
-                  href={item.link}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  {item.title}
-                </a>
-              </Typography>
-            </div>
-          </div>
-        ))}
-      />
-      <Dots
-        value={value}
-        number={slides.length}
-        onChange={(e) => setValue(e)}
-      />
-    </>
-  );
-};
-
 export default () => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -160,7 +102,7 @@ export default () => {
     <Box className={classes.root}>
       <>
         <Typography component="div" sx={{}}>
-          <HeroSlider classes={classes} slides={adverts} />
+          <HeroSlider slides={adverts} />
         </Typography>
         {categories.length !== 0 && (
           <Categories categories={categories} />

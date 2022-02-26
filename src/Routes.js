@@ -22,6 +22,7 @@ import PrivacyPolicy from './pages/client/Privacy';
 import TermsAndConditions from './pages/client/Terms';
 import Users from './pages/client/Users';
 import Adverts from './pages/admin/Adverts';
+import Feeds from './pages/admin/Feeds';
 import Register from './pages/client/Register';
 
 function ClientRoutes() {
@@ -82,6 +83,11 @@ function Routes() {
       <PrivateRoute
         path="/admin/adverts"
         component={Adverts}
+        exact
+      />
+      <PrivateRoute
+        path="/admin/feeds"
+        component={Feeds}
         exact
       />
       <PrivateRoute

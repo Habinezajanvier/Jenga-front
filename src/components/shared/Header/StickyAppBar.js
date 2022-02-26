@@ -143,7 +143,7 @@ const ResponsiveAppBar = ({ styles }) => {
             <MenuItem onClick={handleCloseNavMenu}>
               <Typography textAlign="center">
                 <Link color="inherit" href="/blog">
-                  Blog
+                  Feeds
                 </Link>
               </Typography>
             </MenuItem>
@@ -228,7 +228,7 @@ const ResponsiveAppBar = ({ styles }) => {
                 },
               }}
             >
-              <NavButton to="/blog">Blog</NavButton>
+              <NavButton to="/blog">Feeds</NavButton>
             </Typography>
           )}
           {authenticated && profile && (
@@ -254,7 +254,7 @@ const ResponsiveAppBar = ({ styles }) => {
             }}
           >
             {!authenticated && (
-              <NavButton to="/blog">Blog</NavButton>
+              <NavButton to="/blog">Feeds</NavButton>
             )}
             {!authenticated && (
               <NavButton to="/login">Login</NavButton>
