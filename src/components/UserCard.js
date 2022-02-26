@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import portrait from '../assets/images/portrait.png';
+import portrait from '../assets/images/img_avatar.png';
 import PrimaryButton from './shared/PrimaryButton';
 
 export default function UserCard({
@@ -21,8 +21,8 @@ export default function UserCard({
         component="img"
         alt="green iguana"
         height="180"
-        // image={user.profileImage}
-        image={portrait}
+        image={user.profileImage || portrait}
+        // image={portrait}
       />
       {/* )} */}
       <CardContent>

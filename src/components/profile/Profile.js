@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, CardActions } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
-import portrait from '../../assets/images/portrait.png';
+import portrait from '../../assets/images/img_avatar.png';
 import moment from 'moment';
 
 export default function ProfileCard({ user, openModel }) {
@@ -16,7 +16,7 @@ export default function ProfileCard({ user, openModel }) {
         <CardMedia
           component="img"
           height="240"
-          image={portrait}
+          image={user.profileImage || portrait}
           alt="profile_image"
         />
         <CardContent>

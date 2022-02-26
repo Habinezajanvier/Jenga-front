@@ -7,7 +7,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { Paper } from '@mui/material';
-import portrait from '../assets/images/portrait.png';
+import portrait from '../assets/images/img_avatar.png';
 import moment from 'moment';
 import {
   getOneUser,
@@ -140,7 +140,7 @@ function HireCard({ user }) {
             width: 240,
             display: { xs: 'none', sm: 'block' },
           }}
-          image={portrait}
+          image={profile.profileImage || portrait}
           alt="_alt_"
         />
       </Card>

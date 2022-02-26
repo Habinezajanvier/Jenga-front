@@ -26,6 +26,7 @@ import {
   LocationSearch,
 } from './SearchButton';
 import logo from '../../../assets/images/logo.png';
+import portrait from '../../../assets/images/img_avatar.png';
 import SearchResult from './SearchResult';
 
 const settings = [
@@ -240,7 +241,7 @@ const ResponsiveAppBar = ({ styles }) => {
               >
                 <Avatar
                   alt={profile.firstname}
-                  src={profile.profileImage}
+                  src={profile.profileImage || portrait}
                 />
               </IconButton>
             </Tooltip>
