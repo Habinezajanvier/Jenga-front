@@ -34,7 +34,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '2rem',
     '& h1': {
       fontWeight: '500',
-      marginTop: '1.6rem',
+      marginTop: '1.0rem',
+      color: theme.palette.primary.main,
+      textAlign: 'center',
       marginBottom: '3.1rem',
       '& span': {
         fontWeight: '700',

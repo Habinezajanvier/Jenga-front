@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default () => {
+export default function Users() {
   document.title = 'Workers | Jenga';
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -117,4 +117,4 @@ export default () => {
       </TransitionsModal>
     </Box>
   );
-};
+}
