@@ -25,13 +25,26 @@ export default function UserCard({
         // image={portrait}
       />
       {/* )} */}
-      <CardContent>
+      <CardContent
+        sx={{
+          height: 120,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        }}
+      >
         <Typography
           gutterBottom
           variant="h5"
           component="div"
         >
           {user.firstname} {user.lastname}
+        </Typography>
+        <Typography
+          gutterBottom
+          variant="subtitle3"
+          color="text.secondary"
+        >
+          {user.profileTitle}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {user.bios}

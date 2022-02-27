@@ -203,6 +203,7 @@ const ResponsiveAppBar = ({ styles }) => {
             />
           </form>
           <Divider orientation="vertical" flexItem />
+          <Divider />
           <LocationSearch
             placeholder="Search Location"
             inputProps={{

@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default () => {
+export default function HomePage() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [openMore, setOpenMore] = React.useState(false);
@@ -154,4 +154,4 @@ export default () => {
       </TransitionsModal>
     </Box>
   );
-};
+}

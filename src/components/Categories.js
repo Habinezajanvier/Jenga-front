@@ -18,16 +18,17 @@ const useStyles = makeStyles((theme) => ({
     '& h2': {
       textAlign: 'center',
       color: '#999',
-      marginTop: '1.4rem',
+      mt: '1.4rem',
       fontSize: '1.2rem',
     },
     '& h1': {
       textAlign: 'center',
       fontWeight: '500',
-      marginTop: '1.6rem',
+      mt: '1.0rem',
+      color: theme.palette.primary.main,
       marginBottom: '3.1rem',
       '& span': {
-        fontWeight: '700',
+        fontWeight: '600',
       },
     },
   },
