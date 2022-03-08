@@ -156,7 +156,7 @@ const ResponsiveAppBar = ({ styles }) => {
             </MenuItem>
             <MenuItem onClick={handleCloseNavMenu}>
               <Typography textAlign="center">
-                <Link color="inherit" href="/singup">
+                <Link color="inherit" href="/easy-apply">
                   Join Us
                 </Link>
               </Typography>
